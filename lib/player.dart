@@ -458,7 +458,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                 },
                 onVerticalDragUpdate: _controlVB,
                 onVerticalDragEnd: (_) => _hideAllInfo(),
-                onVerticalDragCancel: () => _hideAllInfo(),
+//                onVerticalDragCancel: () => _hideAllInfo(),
                 // 水平
                 onHorizontalDragDown: (DragDownDetails details) {
                   _preLoadPosition = _videoPlayerController.value.position.inSeconds;
@@ -469,10 +469,10 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                   _seekTo(_preLoadPosition.toDouble());
                   _hideAllInfo();
                 },
-                onHorizontalDragCancel: () {
-                  _seekTo(_preLoadPosition.toDouble());
-                  _hideAllInfo();
-                },
+//                onHorizontalDragCancel: () {
+//                  _seekTo(_preLoadPosition.toDouble());
+//                  _hideAllInfo();
+//                },
               ),
             ),
             // 锁定按钮

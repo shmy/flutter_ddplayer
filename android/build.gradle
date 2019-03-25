@@ -1,0 +1,46 @@
+group 'tech.shmy.plugins.dd_player.dd_player'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url 'http://4thline.org/m2'
+        }
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 16
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Cling
+    implementation group: 'org.fourthline.cling', name: 'cling-core', version: '2.1.2-SNAPSHOT'
+    implementation group: 'org.fourthline.cling', name: 'cling-support', version: '2.1.2-SNAPSHOT'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-server', version:'8.1.18.v20150929'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-servlet', version:'8.1.18.v20150929'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-client', version:'8.1.18.v20150929'
+}

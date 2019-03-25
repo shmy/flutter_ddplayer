@@ -199,8 +199,8 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
     }
     private int decrementBrightness() {
         int val = this.getBrightness() - 5;
-        if (val <= 0) {
-            val = 0;
+        if (val <= 5) {
+            val = 5;
         }
         return this.setBrightness(val);
     }

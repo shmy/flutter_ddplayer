@@ -123,6 +123,20 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     return _formatTime(
         _videoPlayerController.value.duration.inSeconds.toDouble());
   }
+  double get _position {
+    double position =_videoPlayerController.value.position.inSeconds
+        .toDouble();
+    // fix live
+    if (position >= _duration) {
+      return _duration;
+    }
+    return position;
+  }
+  double get _duration {
+    double duration =_videoPlayerController.value.duration.inSeconds
+        .toDouble();
+    return duration;
+  }
 
   @override
   void initState() {
@@ -512,10 +526,8 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                     child: Container(
                       padding: EdgeInsets.all(0.0),
                       child: Slider(
-                        value: _videoPlayerController.value.position.inSeconds
-                            .toDouble(),
-                        max: _videoPlayerController.value.duration.inSeconds
-                            .toDouble(),
+                        value: _position,
+                        max: _duration,
                         onChanged: (d) {
                           _seekTo(d);
                         },

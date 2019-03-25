@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/volume.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/DdPlayerPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/DdPlayerPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/player.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/player.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -34,20 +29,20 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="2123" />
+          <entry key="dart" value="2436" />
           <entry key="gradle" value="1" />
           <entry key="java" value="172" />
-          <entry key="txt" value="22" />
+          <entry key="txt" value="31" />
           <entry key="xml" value="4" />
           <entry key="yaml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="2123" />
+          <entry key="Dart" value="2436" />
           <entry key="Groovy" value="1" />
           <entry key="JAVA" value="172" />
-          <entry key="PLAIN_TEXT" value="22" />
+          <entry key="PLAIN_TEXT" value="31" />
           <entry key="XML" value="4" />
           <entry key="YAML" value="1" />
         </counts>
@@ -77,8 +72,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/player.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="357" column="23" lean-forward="true" selection-start-line="357" selection-start-column="23" selection-end-line="357" selection-end-column="23" />
+            <state relative-caret-position="399">
+              <caret line="471" column="44" lean-forward="true" selection-start-line="471" selection-start-column="44" selection-end-line="471" selection-end-column="44" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
                 <element signature="e#411#517#0" />
@@ -86,9 +81,8 @@
                 <element signature="e#1864#2066#0" />
                 <element signature="e#2930#3311#0" />
                 <element signature="e#3342#3440#0" />
-                <element signature="e#3471#3569#0" />
                 <element signature="e#3840#4035#0" />
-                <element signature="e#24107#24832#0" />
+                <element signature="e#24253#24978#0" />
               </folding>
             </state>
           </provider>
@@ -115,6 +109,8 @@
       <find>volume:getBrightness</find>
       <find>radi</find>
       <find>buildCe</find>
+      <find>_showVolumeInfo</find>
+      <find>slider</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -255,7 +251,21 @@
       <option name="project" value="LOCAL" />
       <updated>1553490162671</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="添加亮度和音量控制">
+      <created>1553504252177</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1553504252177</updated>
+    </task>
+    <task id="LOCAL-00004" summary="添加亮度和音量控制">
+      <created>1553504432289</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1553504432289</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -296,7 +306,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix live" />
     <MESSAGE value="keep screen on" />
-    <option name="LAST_COMMIT_MESSAGE" value="keep screen on" />
+    <MESSAGE value="添加亮度和音量控制" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加亮度和音量控制" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pubspec.yaml">
@@ -440,8 +451,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/player.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="357" column="23" lean-forward="true" selection-start-line="357" selection-start-column="23" selection-end-line="357" selection-end-column="23" />
+        <state relative-caret-position="399">
+          <caret line="471" column="44" lean-forward="true" selection-start-line="471" selection-start-column="44" selection-end-line="471" selection-end-column="44" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <element signature="e#411#517#0" />
@@ -449,9 +460,8 @@
             <element signature="e#1864#2066#0" />
             <element signature="e#2930#3311#0" />
             <element signature="e#3342#3440#0" />
-            <element signature="e#3471#3569#0" />
             <element signature="e#3840#4035#0" />
-            <element signature="e#24107#24832#0" />
+            <element signature="e#24253#24978#0" />
           </folding>
         </state>
       </provider>

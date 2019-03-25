@@ -121,6 +121,8 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   int _maxVolume = 1;
   bool _showBrightnessInfo = false;
   bool _showVolumeInfo = false;
+  bool _showPositionInfo = false;
+  int _preLoadPosition = 0;
 
   Widget build(BuildContext context) {
     if (_videoPlayerController?.value != null) {
@@ -144,6 +146,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   String get _formatDuration {
     return _formatTime(
         _videoPlayerController.value.duration.inSeconds.toDouble());
+  }
+  String get _formatPrePosition {
+    return _formatTime(_preLoadPosition.toDouble());
   }
 
   String get _volumePercentage {
@@ -369,6 +374,12 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   }
 
   Widget _buildVideoCenter() {
+    if (_showPositionInfo) {
+      return _buildCenterContainer(Text("进度: " + _formatPrePosition + " / " + _formatDuration,
+          style: TextStyle(
+            color: Colors.white,
+          )));
+    }
     if (_showVolumeInfo) {
       return _buildCenterContainer(Text("音量: " + _volumePercentage + "%",
           style: TextStyle(
@@ -448,11 +459,19 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                 onVerticalDragUpdate: _controlVB,
                 onVerticalDragEnd: (_) => _hideAllInfo(),
                 onVerticalDragCancel: () => _hideAllInfo(),
-//                  // 水平
-                onHorizontalDragDown: (DragDownDetails details) {},
-                onHorizontalDragUpdate: (DragUpdateDetails details) {
-                  print('-------onHorizontalDragUpdate------');
-                  print(details);
+                // 水平
+                onHorizontalDragDown: (DragDownDetails details) {
+                  _preLoadPosition = _videoPlayerController.value.position.inSeconds;
+                  _panStartX = details.globalPosition.dx;
+                },
+                onHorizontalDragUpdate: _controlPosition,
+                onHorizontalDragEnd: (_) {
+                  _seekTo(_preLoadPosition.toDouble());
+                  _hideAllInfo();
+                },
+                onHorizontalDragCancel: () {
+                  _seekTo(_preLoadPosition.toDouble());
+                  _hideAllInfo();
                 },
               ),
             ),
@@ -789,9 +808,30 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     setState(() {
       _showVolumeInfo = false;
       _showBrightnessInfo = false;
+      _showPositionInfo = false;
     });
   }
-
+  // 控制进度
+  void _controlPosition(DragUpdateDetails details) {
+    if (_isLocked) {
+      return;
+    }
+    if (details.sourceTimeStamp.inMilliseconds - _lastSourceTimeStamp < 120) {
+      return;
+    }
+    _hideAllInfo();
+    _lastSourceTimeStamp = details.sourceTimeStamp.inMilliseconds;
+    double lastPanStartX = details.globalPosition.dx - _panStartX;
+    _panStartX = details.globalPosition.dx;
+    setState(() {
+      _showPositionInfo = true;
+    });
+    if (lastPanStartX < 0) {
+      _preLoadPosition -= 5;
+    } else {
+      _preLoadPosition += 5;
+    }
+  }
   // 控制音量和亮度
   void _controlVB(DragUpdateDetails details) async {
     if (_isLocked) {

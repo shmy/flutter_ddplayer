@@ -147,6 +147,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     return _formatTime(
         _videoPlayerController.value.duration.inSeconds.toDouble());
   }
+
   String get _formatPrePosition {
     return _formatTime(_preLoadPosition.toDouble());
   }
@@ -375,10 +376,11 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
   Widget _buildVideoCenter() {
     if (_showPositionInfo) {
-      return _buildCenterContainer(Text("进度: " + _formatPrePosition + " / " + _formatDuration,
-          style: TextStyle(
-            color: Colors.white,
-          )));
+      return _buildCenterContainer(
+          Text("进度: " + _formatPrePosition + " / " + _formatDuration,
+              style: TextStyle(
+                color: Colors.white,
+              )));
     }
     if (_showVolumeInfo) {
       return _buildCenterContainer(Text("音量: " + _volumePercentage + "%",
@@ -453,19 +455,34 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                 },
                 // 垂直
                 onVerticalDragDown: (DragDownDetails details) {
+                  if (_isLocked) {
+                    return;
+                  }
                   _panStartX = details.globalPosition.dx;
                   _panStartY = details.globalPosition.dy;
                 },
                 onVerticalDragUpdate: _controlVB,
-                onVerticalDragEnd: (_) => _hideAllInfo(),
+                onVerticalDragEnd: (_) {
+                  if (_isLocked) {
+                    return;
+                  }
+                  _hideAllInfo();
+                },
 //                onVerticalDragCancel: () => _hideAllInfo(),
                 // 水平
                 onHorizontalDragDown: (DragDownDetails details) {
-                  _preLoadPosition = _videoPlayerController.value.position.inSeconds;
+                  if (_isLocked) {
+                    return;
+                  }
+                  _preLoadPosition =
+                      _videoPlayerController.value.position.inSeconds;
                   _panStartX = details.globalPosition.dx;
                 },
                 onHorizontalDragUpdate: _controlPosition,
                 onHorizontalDragEnd: (_) {
+                  if (_isLocked) {
+                    return;
+                  }
                   _seekTo(_preLoadPosition.toDouble());
                   _hideAllInfo();
                 },
@@ -811,6 +828,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
       _showPositionInfo = false;
     });
   }
+
   // 控制进度
   void _controlPosition(DragUpdateDetails details) {
     if (_isLocked) {
@@ -832,6 +850,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
       _preLoadPosition += 5;
     }
   }
+
   // 控制音量和亮度
   void _controlVB(DragUpdateDetails details) async {
     if (_isLocked) {

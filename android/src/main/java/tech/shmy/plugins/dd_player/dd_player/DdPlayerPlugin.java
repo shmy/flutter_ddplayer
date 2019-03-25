@@ -74,7 +74,7 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
   public void onCancel(Object arguments) {
     System.out.println("-- onCancel -----");
     BrowseRegistryListener.eventSink = null;
-    this.stop();
+//    this.stop();
   }
 
   private void search() {

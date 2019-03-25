@@ -8,7 +8,7 @@ class  Player extends StatelessWidget {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: DdPlayer(url: "https://cv.phncdn.com/videos/201901/28/204302121/720P_1500K_204302121.mp4?UeToNXSVhVkcjRj-Pkep1eg8OS6dXzfSSdpciRhGvbOFRuXXA7uf4joWObAQOv8DhAzjfRNT6Nbk8SpnJ6pGp7_y-knzPTVaE2yS_6wR5xDqtvVkQ51Pyhnv7rq-U6q4tZCRvho7uz3bc_XbZtClXWs34T79aXqQdslXyi7JX-5kEEly7pnyM0KrSJ7D-h1zT9MLYLBtTA0",),
+          child: DdPlayer(url: "https://hair.jingpin88.com/20171029/Fillu3JT/index.m3u8",),
         ),
     );
   }

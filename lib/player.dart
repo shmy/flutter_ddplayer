@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dd_player/screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,6 +50,7 @@ class _DdPlayer extends State<DdPlayer> {
       }
       setState(() {});
     };
+    setNormallyOn();
     _buildPlayer();
   }
 
@@ -67,6 +69,13 @@ class _DdPlayer extends State<DdPlayer> {
       _videoPlayerController.dispose();
       _videoPlayerController = null;
     }
+    unSetNormallyOn();
+  }
+  void setNormallyOn() async {
+    await DdPlayerScreen.setNormallyOn();
+  }
+  void unSetNormallyOn() async {
+    await DdPlayerScreen.unSetNormallyOn();
   }
 }
 

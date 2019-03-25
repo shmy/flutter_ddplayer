@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.view.Window;
+import android.view.WindowManager;
 
 import org.fourthline.cling.android.AndroidUpnpService;
 import org.fourthline.cling.android.AndroidUpnpServiceImpl;
@@ -62,6 +64,10 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
       this.playUrl(uuid, url);
     } else if (call.method.equals("dlna:getList")) {
       result.success(browseRegistryListener.getDevices());
+    } else if (call.method.equals("screen:setNormallyOn")) {
+      this.setNormallyOn();
+    }else if (call.method.equals("screen:unSetNormallyOn")) {
+      this.unSetNormallyOn();
     } else {
       result.notImplemented();
     }
@@ -136,5 +142,13 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         System.out.println("play err:--defaultMsg--" + defaultMsg);
       }
     });
+  }
+  private void setNormallyOn() {
+    Window window = this.activity.getWindow();
+    window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+  }
+  private void unSetNormallyOn() {
+    Window window = this.activity.getWindow();
+    window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
   }
 }

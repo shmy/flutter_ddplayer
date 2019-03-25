@@ -1,13 +1,8 @@
 import 'dart:async';
-
-import 'package:flutter/services.dart';
+import './defs.dart';
 
 class DdPlayerDlna {
-  static const CHANNEL_NAME = "tech.shmy.plugins/dd_player/";
-  static const MethodChannel methodChannel =
-  const MethodChannel(CHANNEL_NAME + "method_channel");
-  static const EventChannel eventChannel =
-  const EventChannel(CHANNEL_NAME + "event_channel");
+
   static StreamSubscription eventSubscription;
 
   static init(cb) {

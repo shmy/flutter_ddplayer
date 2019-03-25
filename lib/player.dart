@@ -21,7 +21,6 @@ class DdPlayer extends StatefulWidget {
 
 class _DdPlayer extends State<DdPlayer> {
   VideoPlayerController _videoPlayerController;
-  VoidCallback listener;
 
   Widget build(BuildContext context) {
     return VideoView(
@@ -45,12 +44,6 @@ class _DdPlayer extends State<DdPlayer> {
 
   void initState() {
     super.initState();
-    listener = () {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    };
     setNormallyOn();
     _buildPlayer();
   }
@@ -390,16 +383,11 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     }
     if (_showBrightnessInfo) {
       return _buildCenterContainer(Text(
-        "亮度: " + _currentBrightness.toString() + "%",
+        "亮度: " + _currentBrightness.abs().toString() + "%",
         style: TextStyle(
           color: Colors.white,
         ),
       ));
-    }
-    if (_videoPlayerController.value.isBuffering) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
     }
 
     return _emptyWidget();
@@ -421,15 +409,42 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                 left: 0.0,
                 right: 0.0,
                 bottom: 0.0,
-                child: Center(
-                  child: AspectRatio(
-                    aspectRatio: _videoPlayerController.value.aspectRatio,
-                    child: _videoPlayerController == null
-                        ? Container(
-                            color: Colors.black,
-                          )
-                        : VideoPlayer(_videoPlayerController),
-                  ),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                      top: 0.0,
+                      left: 0.0,
+                      right: 0.0,
+                      bottom: 0.0,
+                      child: Center(
+                        child: AspectRatio(
+                          aspectRatio: _videoPlayerController.value.aspectRatio,
+                          child: _videoPlayerController == null
+                              ? Container(
+                                  color: Colors.black,
+                                )
+                              : VideoPlayer(_videoPlayerController),
+                        ),
+                      ),
+                    ),
+                    // 加载条
+                    Positioned(
+                      top: 0.0,
+                      left: 0.0,
+                      right: 0.0,
+                      bottom: 0.0,
+                      child: _videoPlayerController != null
+                          ? Opacity(
+                              opacity: _videoPlayerController.value.isBuffering
+                                  ? 1.0
+                                  : 0.0,
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            )
+                          : _emptyWidget(),
+                    )
+                  ],
                 )),
             // 加载状态/控制显示
             Positioned(

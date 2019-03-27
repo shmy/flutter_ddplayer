@@ -12,8 +12,9 @@ enum _PopupType { none, dlna, other }
 
 class DdPlayer extends StatefulWidget {
   String url;
+  Widget thumbnail;
 
-  DdPlayer({Key key, this.url});
+  DdPlayer({Key key, @required this.url, this.thumbnail});
 
   @override
   _DdPlayer createState() => _DdPlayer();
@@ -25,6 +26,7 @@ class _DdPlayer extends State<DdPlayer> {
   Widget build(BuildContext context) {
     return VideoView(
       controller: _videoPlayerController,
+      thumbnail: widget.thumbnail,
     );
   }
 
@@ -78,8 +80,10 @@ class _DdPlayer extends State<DdPlayer> {
 class VideoView extends StatefulWidget {
   VideoPlayerController controller;
   bool isFullScreenMode = false;
+  Widget thumbnail;
 
-  VideoView({Key key, this.controller, this.isFullScreenMode = false});
+  VideoView(
+      {Key key, this.controller, this.thumbnail, this.isFullScreenMode = false});
 
   @override
   _VideoView createState() => _VideoView();
@@ -87,8 +91,8 @@ class VideoView extends StatefulWidget {
 
 class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   VideoPlayerController get _videoPlayerController => widget.controller;
-
   bool get _isFullScreenMode => widget.isFullScreenMode;
+  Widget get _thumbnail => widget.thumbnail;
   bool _isHiddenControls = true;
   bool _isLocked = false;
   bool _isShowPopup = false;
@@ -151,7 +155,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
   double get _position {
     double position =
-        _videoPlayerController.value.position.inSeconds.toDouble();
+    _videoPlayerController.value.position.inSeconds.toDouble();
     // fix live
     if (position >= _duration) {
       return _duration;
@@ -161,7 +165,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
   double get _duration {
     double duration =
-        _videoPlayerController.value.duration.inSeconds.toDouble();
+    _videoPlayerController.value.duration.inSeconds.toDouble();
     return duration;
   }
 
@@ -175,44 +179,44 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     _slideBottomAnimationController =
         AnimationController(duration: Duration(milliseconds: 200), vsync: this);
     _animation =
-        new Tween(begin: -_popupWidth, end: 0.0).animate(_animationController)
-          ..addStatusListener((state) {
-            if (state == AnimationStatus.forward) {
-              setState(() {
-                _isShowPopup = true;
-              });
-            } else if (state == AnimationStatus.reverse) {
-              setState(() {
-                _isShowPopup = false;
-              });
-            }
+    new Tween(begin: -_popupWidth, end: 0.0).animate(_animationController)
+      ..addStatusListener((state) {
+        if (state == AnimationStatus.forward) {
+          setState(() {
+            _isShowPopup = true;
           });
+        } else if (state == AnimationStatus.reverse) {
+          setState(() {
+            _isShowPopup = false;
+          });
+        }
+      });
     _slideTopAnimation =
-        new Tween(begin: -75.0, end: 0.0).animate(_slideTopAnimationController)
-          ..addStatusListener((state) {
-            if (state == AnimationStatus.forward) {
-              setState(() {
-                _isHiddenControls = false;
-              });
-            } else if (state == AnimationStatus.reverse) {
-              setState(() {
-                _isHiddenControls = true;
-              });
-            }
+    new Tween(begin: -75.0, end: 0.0).animate(_slideTopAnimationController)
+      ..addStatusListener((state) {
+        if (state == AnimationStatus.forward) {
+          setState(() {
+            _isHiddenControls = false;
           });
+        } else if (state == AnimationStatus.reverse) {
+          setState(() {
+            _isHiddenControls = true;
+          });
+        }
+      });
     _slideBottomAnimation = new Tween(begin: -30.0, end: 0.0)
         .animate(_slideBottomAnimationController)
-          ..addStatusListener((state) {
-            if (state == AnimationStatus.forward) {
-              setState(() {
-                _isHiddenControls = false;
-              });
-            } else if (state == AnimationStatus.reverse) {
-              setState(() {
-                _isHiddenControls = true;
-              });
-            }
+      ..addStatusListener((state) {
+        if (state == AnimationStatus.forward) {
+          setState(() {
+            _isHiddenControls = false;
           });
+        } else if (state == AnimationStatus.reverse) {
+          setState(() {
+            _isHiddenControls = true;
+          });
+        }
+      });
     if (_videoPlayerController != null) {
       _videoPlayerController
         ..addListener(listener)
@@ -283,7 +287,8 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
       );
     }
     return ListView(
-        children: []..addAll(
+        children: []
+          ..addAll(
             _devices.map<Widget>((item) {
               return ListTile(
                 title: Text(
@@ -328,28 +333,40 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 //    print(devices);
   }
 
-  Widget _buildMask({String errMsg = "", bool isLoading = false}) {
-    Widget child = _emptyWidget();
-    if (isLoading) {
-      child = Center(
-        child: CircularProgressIndicator(),
-      );
-    } else if (errMsg != "") {
-      child = Center(
-        child: Text(
-          errMsg,
-          style: TextStyle(color: Colors.white),
-        ),
-      );
-    }
+  Widget _buildThumbnail(Widget thumbnailBg, Widget child) {
+    var height = _isFullScreenMode ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height / 3;
+    var width = MediaQuery.of(context).size.width;
     return Container(
       color: Colors.black,
-      height: _isFullScreenMode
-          ? MediaQuery.of(context).size.height
-          : MediaQuery.of(context).size.height / 3,
-      width: MediaQuery.of(context).size.width,
-      child: child,
+      height: height,
+      width: width,
+      child: Stack(
+        children: <Widget>[
+          Positioned.fill(child: thumbnailBg),
+          Positioned.fill(child: Center(
+            child: child,
+          ),),
+        ],
+      ),
     );
+  }
+
+  Widget _buildMask(
+      {String errMsg = "", bool isLoading = false}) {
+    Widget thumbnailBg = _thumbnail;
+    if (thumbnailBg == null) {
+      thumbnailBg = _emptyWidget();
+    }
+    Widget child = _emptyWidget();
+    if (isLoading) {
+      child = CircularProgressIndicator();
+    } else if (errMsg != "") {
+      child = Text(
+          errMsg,
+          style: TextStyle(color: Colors.white),
+      );
+    }
+    return _buildThumbnail(thumbnailBg, child);
   }
 
   Widget _buildCenterContainer(Widget child) {
@@ -392,176 +409,190 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
     return _emptyWidget();
   }
-
-  Widget _buildVideo() {
-    return WillPopScope(
-      child: Container(
-        color: Colors.black,
-        height: _isFullScreenMode
-            ? MediaQuery.of(context).size.height
-            : MediaQuery.of(context).size.height / 3,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: <Widget>[
-            // 播放区域
-            Positioned(
-                top: 0.0,
-                left: 0.0,
-                right: 0.0,
-                bottom: 0.0,
-                child: Stack(
-                  children: <Widget>[
-                    Positioned(
-                      top: 0.0,
-                      left: 0.0,
-                      right: 0.0,
-                      bottom: 0.0,
-                      child: Center(
-                        child: AspectRatio(
-                          aspectRatio: _videoPlayerController.value.aspectRatio,
-                          child: _videoPlayerController == null
-                              ? Container(
-                                  color: Colors.black,
-                                )
-                              : VideoPlayer(_videoPlayerController),
-                        ),
-                      ),
-                    ),
-                    // 加载条
-                    Positioned(
-                      top: 0.0,
-                      left: 0.0,
-                      right: 0.0,
-                      bottom: 0.0,
-                      child: _videoPlayerController != null
-                          ? Opacity(
-                              opacity: _videoPlayerController.value.isBuffering
-                                  ? 1.0
-                                  : 0.0,
-                              child: Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            )
-                          : _emptyWidget(),
-                    )
-                  ],
-                )),
-            // 加载状态/控制显示
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: _buildVideoCenter(),
-            ),
-            // 手势区域
-            Positioned(
+  Widget __buildVideo() {
+    return Container(
+      color: Colors.black,
+      height: _isFullScreenMode
+          ? MediaQuery
+          .of(context)
+          .size
+          .height
+          : MediaQuery
+          .of(context)
+          .size
+          .height / 3,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
+      child: Stack(
+        children: <Widget>[
+          // 播放区域
+          Positioned(
               top: 0.0,
               left: 0.0,
               right: 0.0,
               bottom: 0.0,
-              child: GestureDetector(
-                onTap: () {
-                  _switchControls();
-                },
-                onDoubleTap: () {
-                  // 双加切换播放/暂停
-                  _switchPlayState();
-                },
-                // 垂直
-                onVerticalDragDown: (DragDownDetails details) {
-                  if (_isLocked) {
-                    return;
-                  }
-                  _panStartX = details.globalPosition.dx;
-                  _panStartY = details.globalPosition.dy;
-                },
-                onVerticalDragUpdate: _controlVB,
-                onVerticalDragEnd: (_) {
-                  if (_isLocked) {
-                    return;
-                  }
-                  _hideAllInfo();
-                },
+              child: Stack(
+                children: <Widget>[
+                  Positioned(
+                    top: 0.0,
+                    left: 0.0,
+                    right: 0.0,
+                    bottom: 0.0,
+                    child: Center(
+                      child: AspectRatio(
+                        aspectRatio: _videoPlayerController.value.aspectRatio,
+                        child: _videoPlayerController == null
+                            ? Container(
+                          color: Colors.black,
+                        )
+                            : VideoPlayer(_videoPlayerController),
+                      ),
+                    ),
+                  ),
+                  // 加载条
+                  Positioned(
+                    top: 0.0,
+                    left: 0.0,
+                    right: 0.0,
+                    bottom: 0.0,
+                    child: _videoPlayerController != null
+                        ? Opacity(
+                      opacity: _videoPlayerController.value.isBuffering
+                          ? 1.0
+                          : 0.0,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                        : _emptyWidget(),
+                  )
+                ],
+              )),
+          // 加载状态/控制显示
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: _buildVideoCenter(),
+          ),
+          // 手势区域
+          Positioned(
+            top: 0.0,
+            left: 0.0,
+            right: 0.0,
+            bottom: 0.0,
+            child: GestureDetector(
+              onTap: () {
+                _switchControls();
+              },
+              onDoubleTap: () {
+                // 双加切换播放/暂停
+                _switchPlayState();
+              },
+              // 垂直
+              onVerticalDragDown: (DragDownDetails details) {
+                if (_isLocked) {
+                  return;
+                }
+                _panStartX = details.globalPosition.dx;
+                _panStartY = details.globalPosition.dy;
+              },
+              onVerticalDragUpdate: _controlVB,
+              onVerticalDragEnd: (_) {
+                if (_isLocked) {
+                  return;
+                }
+                _hideAllInfo();
+              },
 //                onVerticalDragCancel: () => _hideAllInfo(),
-                // 水平
-                onHorizontalDragDown: (DragDownDetails details) {
-                  if (_isLocked) {
-                    return;
-                  }
-                  _preLoadPosition =
-                      _videoPlayerController.value.position.inSeconds;
-                  _panStartX = details.globalPosition.dx;
-                },
-                onHorizontalDragUpdate: _controlPosition,
-                onHorizontalDragEnd: (_) {
-                  if (_isLocked) {
-                    return;
-                  }
-                  _seekTo(_preLoadPosition.toDouble());
-                  _hideAllInfo();
-                },
+              // 水平
+              onHorizontalDragDown: (DragDownDetails details) {
+                if (_isLocked) {
+                  return;
+                }
+                _preLoadPosition =
+                    _videoPlayerController.value.position.inSeconds;
+                _panStartX = details.globalPosition.dx;
+              },
+              onHorizontalDragUpdate: _controlPosition,
+              onHorizontalDragEnd: (_) {
+                if (_isLocked) {
+                  return;
+                }
+                _seekTo(_preLoadPosition.toDouble());
+                _hideAllInfo();
+              },
 //                onHorizontalDragCancel: () {
 //                  _seekTo(_preLoadPosition.toDouble());
 //                  _hideAllInfo();
 //                },
+            ),
+          ),
+          // 锁定按钮
+          !_isFullScreenMode || _isHiddenControls
+              ? _emptyWidget()
+              : Positioned(
+            top: 0,
+            left: 0,
+            bottom: 0,
+            child: Container(
+              width: 40.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      _isLocked ? Icons.lock : Icons.lock_open,
+                      size: 24,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+//                              _hideControls();
+                      if (!_isLocked) {
+                        _hideControls();
+                      } else {
+                        _showControls();
+                      }
+                      setState(() {
+                        _isLocked = !_isLocked;
+                      });
+                    },
+                  )
+                ],
               ),
             ),
-            // 锁定按钮
-            !_isFullScreenMode || _isHiddenControls
-                ? _emptyWidget()
-                : Positioned(
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    child: Container(
-                      width: 40.0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(
-                              _isLocked ? Icons.lock : Icons.lock_open,
-                              size: 24,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-//                              _hideControls();
-                              if (!_isLocked) {
-                                _hideControls();
-                              } else {
-                                _showControls();
-                              }
-                              setState(() {
-                                _isLocked = !_isLocked;
-                              });
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-            // 上部控制条
-            SlideTransition(
-              child: _buildTopControls(),
-              animation: _slideTopAnimation,
-            ),
-            // 下部控制条
-            SlideTransition(
-              child: _buildBottomControls(),
-              animation: _slideBottomAnimation,
-              isBottom: true,
-            ),
-            PlayerPopupAnimated(
-              animation: _animation,
-              width: _popupWidth,
-              child:
-                  _popupType == _PopupType.dlna ? _buildDlna() : _emptyWidget(),
-            ),
-          ],
-        ),
+          ),
+          // 上部控制条
+          SlideTransition(
+            child: _buildTopControls(),
+            animation: _slideTopAnimation,
+          ),
+          // 下部控制条
+          SlideTransition(
+            child: _buildBottomControls(),
+            animation: _slideBottomAnimation,
+            isBottom: true,
+          ),
+          PlayerPopupAnimated(
+            animation: _animation,
+            width: _popupWidth,
+            child:
+            _popupType == _PopupType.dlna ? _buildDlna() : _emptyWidget(),
+          ),
+        ],
       ),
+    );
+  }
+  Widget _buildVideo() {
+    if (!_isFullScreenMode) {
+      return __buildVideo();
+    }
+    return WillPopScope(
+      child: __buildVideo(),
       onWillPop: () async {
         if (!_isFullScreenMode) {
           return true;
@@ -650,25 +681,25 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
               _switchPlayState),
           Expanded(
               child: Row(
-            children: <Widget>[
-              // 进度条
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(0.0),
-                  child: Slider(
-                    value: _position,
-                    max: _duration,
-                    onChanged: (d) {
-                      _seekTo(d);
-                    },
+                children: <Widget>[
+                  // 进度条
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.all(0.0),
+                      child: Slider(
+                        value: _position,
+                        max: _duration,
+                        onChanged: (d) {
+                          _seekTo(d);
+                        },
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              _buildSliderLabel(_formatPosition),
-              _buildSliderLabel("/"),
-              _buildSliderLabel(_formatDuration),
-            ],
-          )),
+                  _buildSliderLabel(_formatPosition),
+                  _buildSliderLabel("/"),
+                  _buildSliderLabel(_formatDuration),
+                ],
+              )),
           !_isFullScreenMode
               ? _buildControlIconButton(Icons.fullscreen, _switchFullMode)
               : _emptyWidget()
@@ -687,9 +718,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   void _rotateScreen() {
     _startTimer();
     _defaultFullScreenOrientation =
-        _defaultFullScreenOrientation == DeviceOrientation.landscapeLeft
-            ? DeviceOrientation.landscapeRight
-            : DeviceOrientation.landscapeLeft;
+    _defaultFullScreenOrientation == DeviceOrientation.landscapeLeft
+        ? DeviceOrientation.landscapeRight
+        : DeviceOrientation.landscapeLeft;
     SystemChrome.setPreferredOrientations([_defaultFullScreenOrientation]);
   }
 
@@ -706,11 +737,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     SystemChrome.setPreferredOrientations([_defaultFullScreenOrientation]);
     await Navigator.of(context).push(PageRouteBuilder(
       settings: RouteSettings(isInitialRoute: false),
-      pageBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-      ) {
+      pageBuilder: (BuildContext context,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,) {
         return AnimatedBuilder(
           animation: animation,
           builder: (BuildContext context, Widget child) {
@@ -718,6 +747,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
               body: VideoView(
                 controller: _videoPlayerController,
                 isFullScreenMode: true,
+                thumbnail: _thumbnail,
               ),
             );
           },
@@ -879,7 +909,10 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     double lastPanStartY = details.globalPosition.dy - _panStartY;
     _panStartY = details.globalPosition.dy;
     int afterVal;
-    if (MediaQuery.of(context).size.width / 2 < _panStartX) {
+    if (MediaQuery
+        .of(context)
+        .size
+        .width / 2 < _panStartX) {
       setState(() {
         _showVolumeInfo = true;
       });
@@ -923,13 +956,14 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     final hoursString = hours >= 10 ? '$hours' : hours == 0 ? '00' : '0$hours';
 
     final minutesString =
-        minutes >= 10 ? '$minutes' : minutes == 0 ? '00' : '0$minutes';
+    minutes >= 10 ? '$minutes' : minutes == 0 ? '00' : '0$minutes';
 
     final secondsString =
-        seconds >= 10 ? '$seconds' : seconds == 0 ? '00' : '0$seconds';
+    seconds >= 10 ? '$seconds' : seconds == 0 ? '00' : '0$seconds';
 
     final formattedTime =
-        '${hoursString == '00' ? '' : hoursString + ':'}$minutesString:$secondsString';
+        '${hoursString == '00' ? '' : hoursString +
+        ':'}$minutesString:$secondsString';
 
     return formattedTime;
   }
@@ -939,11 +973,10 @@ class PlayerPopupAnimated extends AnimatedWidget {
   double width = 0.0;
   Widget child;
 
-  PlayerPopupAnimated(
-      {Key key,
-      @required Animation<double> animation,
-      @required this.width,
-      @required this.child})
+  PlayerPopupAnimated({Key key,
+    @required Animation<double> animation,
+    @required this.width,
+    @required this.child})
       : super(key: key, listenable: animation);
 
   Widget build(BuildContext context) {
@@ -966,11 +999,10 @@ class SlideTransition extends StatelessWidget {
   final Animation<double> animation;
   final bool isBottom;
 
-  SlideTransition(
-      {Key key,
-      @required this.child,
-      @required this.animation,
-      this.isBottom = false});
+  SlideTransition({Key key,
+    @required this.child,
+    @required this.animation,
+    this.isBottom = false});
 
   Widget build(BuildContext context) {
     return AnimatedBuilder(

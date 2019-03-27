@@ -4,14 +4,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/player.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -28,7 +21,7 @@
     <session id="-1997377800">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.1" value="6" />
           <entry key="project.open.time.2" value="5" />
           <entry key="project.open.time.3" value="2" />
@@ -40,7 +33,7 @@
           <entry key="dart" value="2598" />
           <entry key="gradle" value="1" />
           <entry key="java" value="172" />
-          <entry key="txt" value="41" />
+          <entry key="txt" value="51" />
           <entry key="xml" value="4" />
           <entry key="yaml" value="48" />
         </counts>
@@ -50,7 +43,7 @@
           <entry key="Dart" value="2598" />
           <entry key="Groovy" value="1" />
           <entry key="JAVA" value="172" />
-          <entry key="PLAIN_TEXT" value="41" />
+          <entry key="PLAIN_TEXT" value="51" />
           <entry key="XML" value="4" />
           <entry key="YAML" value="48" />
         </counts>
@@ -300,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1553506629984</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="修改官方核心代码">
+      <created>1553518711293</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1553518711293</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -343,7 +343,8 @@
     <MESSAGE value="keep screen on" />
     <MESSAGE value="添加亮度和音量控制" />
     <MESSAGE value="添加进度控制" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加进度控制" />
+    <MESSAGE value="修改官方核心代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改官方核心代码" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/example/android/app/build.gradle">

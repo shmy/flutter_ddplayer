@@ -13,8 +13,9 @@ enum _PopupType { none, dlna, other }
 class DdPlayer extends StatefulWidget {
   String url;
   Widget thumbnail;
+  Function listener;
 
-  DdPlayer({Key key, @required this.url, this.thumbnail});
+  DdPlayer({Key key, @required this.url, this.thumbnail, this.listener});
 
   @override
   _DdPlayer createState() => _DdPlayer();
@@ -27,6 +28,7 @@ class _DdPlayer extends State<DdPlayer> {
     return VideoView(
       controller: _videoPlayerController,
       thumbnail: widget.thumbnail,
+      listener: widget.listener,
     );
   }
 
@@ -81,9 +83,14 @@ class VideoView extends StatefulWidget {
   VideoPlayerController controller;
   bool isFullScreenMode = false;
   Widget thumbnail;
+  Function listener;
 
   VideoView(
-      {Key key, this.controller, this.thumbnail, this.isFullScreenMode = false});
+      {Key key,
+      this.controller,
+      this.thumbnail,
+      this.listener,
+      this.isFullScreenMode = false});
 
   @override
   _VideoView createState() => _VideoView();
@@ -91,8 +98,13 @@ class VideoView extends StatefulWidget {
 
 class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   VideoPlayerController get _videoPlayerController => widget.controller;
+
   bool get _isFullScreenMode => widget.isFullScreenMode;
+
   Widget get _thumbnail => widget.thumbnail;
+
+  Function get _listener => widget.listener;
+
   bool _isHiddenControls = true;
   bool _isLocked = false;
   bool _isShowPopup = false;
@@ -155,7 +167,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
   double get _position {
     double position =
-    _videoPlayerController.value.position.inSeconds.toDouble();
+        _videoPlayerController.value.position.inSeconds.toDouble();
     // fix live
     if (position >= _duration) {
       return _duration;
@@ -165,13 +177,13 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
   double get _duration {
     double duration =
-    _videoPlayerController.value.duration.inSeconds.toDouble();
+        _videoPlayerController.value.duration.inSeconds.toDouble();
     return duration;
   }
 
   @override
   void initState() {
-    super.initState();
+
     _animationController =
         AnimationController(duration: Duration(milliseconds: 200), vsync: this);
     _slideTopAnimationController =
@@ -179,54 +191,60 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     _slideBottomAnimationController =
         AnimationController(duration: Duration(milliseconds: 200), vsync: this);
     _animation =
-    new Tween(begin: -_popupWidth, end: 0.0).animate(_animationController)
-      ..addStatusListener((state) {
-        if (state == AnimationStatus.forward) {
-          setState(() {
-            _isShowPopup = true;
+        new Tween(begin: -_popupWidth, end: 0.0).animate(_animationController)
+          ..addStatusListener((state) {
+            if (state == AnimationStatus.forward) {
+              setState(() {
+                _isShowPopup = true;
+              });
+            } else if (state == AnimationStatus.reverse) {
+              setState(() {
+                _isShowPopup = false;
+              });
+            }
           });
-        } else if (state == AnimationStatus.reverse) {
-          setState(() {
-            _isShowPopup = false;
-          });
-        }
-      });
     _slideTopAnimation =
-    new Tween(begin: -75.0, end: 0.0).animate(_slideTopAnimationController)
-      ..addStatusListener((state) {
-        if (state == AnimationStatus.forward) {
-          setState(() {
-            _isHiddenControls = false;
+        new Tween(begin: -75.0, end: 0.0).animate(_slideTopAnimationController)
+          ..addStatusListener((state) {
+            if (state == AnimationStatus.forward) {
+              setState(() {
+                _isHiddenControls = false;
+              });
+            } else if (state == AnimationStatus.reverse) {
+              setState(() {
+                _isHiddenControls = true;
+              });
+            }
           });
-        } else if (state == AnimationStatus.reverse) {
-          setState(() {
-            _isHiddenControls = true;
-          });
-        }
-      });
     _slideBottomAnimation = new Tween(begin: -30.0, end: 0.0)
         .animate(_slideBottomAnimationController)
-      ..addStatusListener((state) {
-        if (state == AnimationStatus.forward) {
-          setState(() {
-            _isHiddenControls = false;
+          ..addStatusListener((state) {
+            if (state == AnimationStatus.forward) {
+              setState(() {
+                _isHiddenControls = false;
+              });
+            } else if (state == AnimationStatus.reverse) {
+              setState(() {
+                _isHiddenControls = true;
+              });
+            }
           });
-        } else if (state == AnimationStatus.reverse) {
-          setState(() {
-            _isHiddenControls = true;
-          });
-        }
-      });
     if (_videoPlayerController != null) {
       _videoPlayerController
         ..addListener(listener)
         ..setVolume(1.0);
     }
-    _initDlna();
-    _initVB();
+    // 避免内存泄漏
+    WidgetsBinding.instance.addPostFrameCallback((callback) {
+      _initPlatCode();
+    });
+    super.initState();
   }
 
   void listener() {
+    if (_listener != null) {
+      _listener(_videoPlayerController);
+    }
     setState(() {});
   }
 
@@ -259,6 +277,12 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     if (_videoPlayerController != null) {
       _videoPlayerController.removeListener(listener);
     }
+    DdPlayerDlna.stop();
+  }
+
+  void _initPlatCode() {
+    _initDlna();
+    _initVB();
   }
 
   void _initVB() async {
@@ -287,8 +311,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
       );
     }
     return ListView(
-        children: []
-          ..addAll(
+        children: []..addAll(
             _devices.map<Widget>((item) {
               return ListTile(
                 title: Text(
@@ -334,7 +357,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   }
 
   Widget _buildThumbnail(Widget thumbnailBg, Widget child) {
-    var height = _isFullScreenMode ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height / 3;
+    var height = _isFullScreenMode
+        ? MediaQuery.of(context).size.height
+        : MediaQuery.of(context).size.height / 3;
     var width = MediaQuery.of(context).size.width;
     return Container(
       color: Colors.black,
@@ -343,16 +368,17 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
       child: Stack(
         children: <Widget>[
           Positioned.fill(child: thumbnailBg),
-          Positioned.fill(child: Center(
-            child: child,
-          ),),
+          Positioned.fill(
+            child: Center(
+              child: child,
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildMask(
-      {String errMsg = "", bool isLoading = false}) {
+  Widget _buildMask({String errMsg = "", bool isLoading = false}) {
     Widget thumbnailBg = _thumbnail;
     if (thumbnailBg == null) {
       thumbnailBg = _emptyWidget();
@@ -362,8 +388,8 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
       child = CircularProgressIndicator();
     } else if (errMsg != "") {
       child = Text(
-          errMsg,
-          style: TextStyle(color: Colors.white),
+        errMsg,
+        style: TextStyle(color: Colors.white),
       );
     }
     return _buildThumbnail(thumbnailBg, child);
@@ -409,22 +435,14 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
     return _emptyWidget();
   }
+
   Widget __buildVideo() {
     return Container(
       color: Colors.black,
       height: _isFullScreenMode
-          ? MediaQuery
-          .of(context)
-          .size
-          .height
-          : MediaQuery
-          .of(context)
-          .size
-          .height / 3,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
+          ? MediaQuery.of(context).size.height
+          : MediaQuery.of(context).size.height / 3,
+      width: MediaQuery.of(context).size.width,
       child: Stack(
         children: <Widget>[
           // 播放区域
@@ -445,8 +463,8 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                         aspectRatio: _videoPlayerController.value.aspectRatio,
                         child: _videoPlayerController == null
                             ? Container(
-                          color: Colors.black,
-                        )
+                                color: Colors.black,
+                              )
                             : VideoPlayer(_videoPlayerController),
                       ),
                     ),
@@ -459,13 +477,13 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                     bottom: 0.0,
                     child: _videoPlayerController != null
                         ? Opacity(
-                      opacity: _videoPlayerController.value.isBuffering
-                          ? 1.0
-                          : 0.0,
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
+                            opacity: _videoPlayerController.value.isBuffering
+                                ? 1.0
+                                : 0.0,
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
                         : _emptyWidget(),
                   )
                 ],
@@ -535,37 +553,37 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
           !_isFullScreenMode || _isHiddenControls
               ? _emptyWidget()
               : Positioned(
-            top: 0,
-            left: 0,
-            bottom: 0,
-            child: Container(
-              width: 40.0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      _isLocked ? Icons.lock : Icons.lock_open,
-                      size: 24,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
+                  top: 0,
+                  left: 0,
+                  bottom: 0,
+                  child: Container(
+                    width: 40.0,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(
+                            _isLocked ? Icons.lock : Icons.lock_open,
+                            size: 24,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
 //                              _hideControls();
-                      if (!_isLocked) {
-                        _hideControls();
-                      } else {
-                        _showControls();
-                      }
-                      setState(() {
-                        _isLocked = !_isLocked;
-                      });
-                    },
-                  )
-                ],
-              ),
-            ),
-          ),
+                            if (!_isLocked) {
+                              _hideControls();
+                            } else {
+                              _showControls();
+                            }
+                            setState(() {
+                              _isLocked = !_isLocked;
+                            });
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ),
           // 上部控制条
           SlideTransition(
             child: _buildTopControls(),
@@ -581,12 +599,13 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
             animation: _animation,
             width: _popupWidth,
             child:
-            _popupType == _PopupType.dlna ? _buildDlna() : _emptyWidget(),
+                _popupType == _PopupType.dlna ? _buildDlna() : _emptyWidget(),
           ),
         ],
       ),
     );
   }
+
   Widget _buildVideo() {
     if (!_isFullScreenMode) {
       return __buildVideo();
@@ -681,25 +700,25 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
               _switchPlayState),
           Expanded(
               child: Row(
-                children: <Widget>[
-                  // 进度条
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.all(0.0),
-                      child: Slider(
-                        value: _position,
-                        max: _duration,
-                        onChanged: (d) {
-                          _seekTo(d);
-                        },
-                      ),
-                    ),
+            children: <Widget>[
+              // 进度条
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(0.0),
+                  child: Slider(
+                    value: _position,
+                    max: _duration,
+                    onChanged: (d) {
+                      _seekTo(d);
+                    },
                   ),
-                  _buildSliderLabel(_formatPosition),
-                  _buildSliderLabel("/"),
-                  _buildSliderLabel(_formatDuration),
-                ],
-              )),
+                ),
+              ),
+              _buildSliderLabel(_formatPosition),
+              _buildSliderLabel("/"),
+              _buildSliderLabel(_formatDuration),
+            ],
+          )),
           !_isFullScreenMode
               ? _buildControlIconButton(Icons.fullscreen, _switchFullMode)
               : _emptyWidget()
@@ -718,9 +737,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   void _rotateScreen() {
     _startTimer();
     _defaultFullScreenOrientation =
-    _defaultFullScreenOrientation == DeviceOrientation.landscapeLeft
-        ? DeviceOrientation.landscapeRight
-        : DeviceOrientation.landscapeLeft;
+        _defaultFullScreenOrientation == DeviceOrientation.landscapeLeft
+            ? DeviceOrientation.landscapeRight
+            : DeviceOrientation.landscapeLeft;
     SystemChrome.setPreferredOrientations([_defaultFullScreenOrientation]);
   }
 
@@ -737,9 +756,11 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     SystemChrome.setPreferredOrientations([_defaultFullScreenOrientation]);
     await Navigator.of(context).push(PageRouteBuilder(
       settings: RouteSettings(isInitialRoute: false),
-      pageBuilder: (BuildContext context,
-          Animation<double> animation,
-          Animation<double> secondaryAnimation,) {
+      pageBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+      ) {
         return AnimatedBuilder(
           animation: animation,
           builder: (BuildContext context, Widget child) {
@@ -748,6 +769,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                 controller: _videoPlayerController,
                 isFullScreenMode: true,
                 thumbnail: _thumbnail,
+                listener: _listener,
               ),
             );
           },
@@ -909,10 +931,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     double lastPanStartY = details.globalPosition.dy - _panStartY;
     _panStartY = details.globalPosition.dy;
     int afterVal;
-    if (MediaQuery
-        .of(context)
-        .size
-        .width / 2 < _panStartX) {
+    if (MediaQuery.of(context).size.width / 2 < _panStartX) {
       setState(() {
         _showVolumeInfo = true;
       });
@@ -956,27 +975,28 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     final hoursString = hours >= 10 ? '$hours' : hours == 0 ? '00' : '0$hours';
 
     final minutesString =
-    minutes >= 10 ? '$minutes' : minutes == 0 ? '00' : '0$minutes';
+        minutes >= 10 ? '$minutes' : minutes == 0 ? '00' : '0$minutes';
 
     final secondsString =
-    seconds >= 10 ? '$seconds' : seconds == 0 ? '00' : '0$seconds';
+        seconds >= 10 ? '$seconds' : seconds == 0 ? '00' : '0$seconds';
 
     final formattedTime =
-        '${hoursString == '00' ? '' : hoursString +
-        ':'}$minutesString:$secondsString';
+        '${hoursString == '00' ? '' : hoursString + ':'}$minutesString:$secondsString';
 
     return formattedTime;
   }
+
 }
 
 class PlayerPopupAnimated extends AnimatedWidget {
   double width = 0.0;
   Widget child;
 
-  PlayerPopupAnimated({Key key,
-    @required Animation<double> animation,
-    @required this.width,
-    @required this.child})
+  PlayerPopupAnimated(
+      {Key key,
+      @required Animation<double> animation,
+      @required this.width,
+      @required this.child})
       : super(key: key, listenable: animation);
 
   Widget build(BuildContext context) {
@@ -999,10 +1019,11 @@ class SlideTransition extends StatelessWidget {
   final Animation<double> animation;
   final bool isBottom;
 
-  SlideTransition({Key key,
-    @required this.child,
-    @required this.animation,
-    this.isBottom = false});
+  SlideTransition(
+      {Key key,
+      @required this.child,
+      @required this.animation,
+      this.isBottom = false});
 
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -1026,4 +1047,5 @@ class SlideTransition extends StatelessWidget {
       child: child,
     );
   }
+
 }

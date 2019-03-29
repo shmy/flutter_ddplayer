@@ -14,8 +14,14 @@ class DdPlayer extends StatefulWidget {
   String url;
   Widget thumbnail;
   Function listener;
+  bool enableDLNA;
 
-  DdPlayer({Key key, @required this.url, this.thumbnail, this.listener});
+  DdPlayer(
+      {Key key,
+      @required this.url,
+      this.thumbnail,
+      this.listener,
+      this.enableDLNA = false});
 
   @override
   _DdPlayer createState() => _DdPlayer();
@@ -29,6 +35,7 @@ class _DdPlayer extends State<DdPlayer> {
       controller: _videoPlayerController,
       thumbnail: widget.thumbnail,
       listener: widget.listener,
+      enableDLNA: widget.enableDLNA,
     );
   }
 
@@ -84,13 +91,16 @@ class VideoView extends StatefulWidget {
   bool isFullScreenMode = false;
   Widget thumbnail;
   Function listener;
+  bool enableDLNA;
 
-  VideoView(
-      {Key key,
-      this.controller,
-      this.thumbnail,
-      this.listener,
-      this.isFullScreenMode = false});
+  VideoView({
+    Key key,
+    this.controller,
+    this.thumbnail,
+    this.listener,
+    this.isFullScreenMode = false,
+    this.enableDLNA = false,
+  });
 
   @override
   _VideoView createState() => _VideoView();
@@ -104,6 +114,8 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   Widget get _thumbnail => widget.thumbnail;
 
   Function get _listener => widget.listener;
+
+  bool get _enableDLNA => widget.enableDLNA;
 
   bool _isHiddenControls = true;
   bool _isLocked = false;
@@ -183,7 +195,6 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
   @override
   void initState() {
-
     _animationController =
         AnimationController(duration: Duration(milliseconds: 200), vsync: this);
     _slideTopAnimationController =
@@ -340,6 +351,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   }
 
   void _initDlna() async {
+    if (!_enableDLNA) {
+      return;
+    }
     DdPlayerDlna.init((List<dynamic> data) {
       if (!mounted) {
         return;
@@ -599,7 +613,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
             animation: _animation,
             width: _popupWidth,
             child:
-                _popupType == _PopupType.dlna ? _buildDlna() : _emptyWidget(),
+            _popupType == _PopupType.dlna ? _buildDlna() : _emptyWidget(),
           ),
         ],
       ),
@@ -665,7 +679,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
               _isFullScreenMode
                   ? _buildControlIconButton(Icons.rotate_left, _rotateScreen)
                   : _emptyWidget(),
-              _buildControlIconButton(Icons.tv, _enterDlna, 20)
+              _enableDLNA ?  _buildControlIconButton(Icons.tv, _enterDlna, 20) : _emptyWidget(),
 //              _isFullScreenMode
 //                  ? _buildControlIconButton(Icons.tv, _enterDlna, 20)
 //                  : _emptyWidget(),
@@ -770,6 +784,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                 isFullScreenMode: true,
                 thumbnail: _thumbnail,
                 listener: _listener,
+                enableDLNA: _enableDLNA,
               ),
             );
           },
@@ -985,7 +1000,6 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
     return formattedTime;
   }
-
 }
 
 class PlayerPopupAnimated extends AnimatedWidget {
@@ -1047,5 +1061,4 @@ class SlideTransition extends StatelessWidget {
       child: child,
     );
   }
-
 }

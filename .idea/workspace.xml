@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/BrowseRegistryListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/BrowseRegistryListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/DdPlayerPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/DdPlayerPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/dlna.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/dlna.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/player.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -26,18 +24,18 @@
     <session id="-1997377800">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="15" />
-          <entry key="project.open.time.1" value="6" />
+          <entry key="project.closed" value="16" />
+          <entry key="project.open.time.1" value="7" />
           <entry key="project.open.time.2" value="6" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="16" />
+          <entry key="project.opened" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="2767" />
+          <entry key="dart" value="2877" />
           <entry key="gradle" value="1" />
           <entry key="java" value="172" />
           <entry key="txt" value="62" />
@@ -47,7 +45,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="2767" />
+          <entry key="Dart" value="2877" />
           <entry key="Groovy" value="1" />
           <entry key="JAVA" value="172" />
           <entry key="PLAIN_TEXT" value="62" />
@@ -57,7 +55,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="dart" value="46" />
+          <entry key="dart" value="48" />
           <entry key="gitignore" value="1" />
           <entry key="gradle" value="6" />
           <entry key="iml" value="4" />
@@ -70,7 +68,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Dart" value="46" />
+          <entry key="Dart" value="48" />
           <entry key="Groovy" value="6" />
           <entry key="IDEA_MODULE" value="4" />
           <entry key="JAVA" value="9" />
@@ -83,7 +81,26 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/defs.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="37" selection-start-column="37" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/player.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="424">
+              <caret line="681" column="96" selection-start-line="681" selection-start-column="96" selection-end-line="681" selection-end-column="96" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -110,9 +127,12 @@
       <find>currentVolume</find>
       <find>_currentBrightness</find>
       <find>isBuff</find>
-      <find>dlna</find>
       <find>_initDlna</find>
       <find>inits</find>
+      <find>dlna</find>
+      <find>_buildDlna</find>
+      <find>_PopupType</find>
+      <find>buildd</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -133,8 +153,8 @@
         <option value="$PROJECT_DIR$/lib/volume.dart" />
         <option value="$PROJECT_DIR$/lib/screen.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
-        <option value="$PROJECT_DIR$/lib/player.dart" />
         <option value="$PROJECT_DIR$/lib/dlna.dart" />
+        <option value="$PROJECT_DIR$/lib/player.dart" />
       </list>
     </option>
   </component>
@@ -147,6 +167,22 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="dd_player" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="dd_player" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="lib" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="ProjectPane">
@@ -181,22 +217,6 @@
           <select />
         </subPane>
         <option name="show-excluded-files" value="false" />
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="dd_player" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="dd_player" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="lib" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
       </pane>
     </panes>
   </component>
@@ -297,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1553828586539</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="避免部分机型闪退">
+      <created>1553838362293</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1553838362293</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -459,13 +486,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/defs.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="37" selection-start-column="37" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/screen.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -487,13 +507,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/player.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="236" column="13" selection-start-line="236" selection-start-column="13" selection-end-line="236" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -505,6 +518,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/defs.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="37" selection-start-column="37" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/player.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="681" column="96" selection-start-line="681" selection-start-column="96" selection-end-line="681" selection-end-column="96" />
         </state>
       </provider>
     </entry>

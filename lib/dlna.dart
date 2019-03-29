@@ -2,20 +2,23 @@ import 'dart:async';
 import './defs.dart';
 
 class DdPlayerDlna {
-
   static StreamSubscription eventSubscription;
 
   static init(cb) {
     eventSubscription =
         eventChannel.receiveBroadcastStream().listen((dynamic data) {
-          cb(data);
-        });
+      cb(data);
+    });
   }
 
   static Future<List<dynamic>> get devices async {
-    final List<dynamic> devices =
-    await methodChannel.invokeMethod('dlna:getList');
-    return devices;
+    try {
+      final List<dynamic> devices =
+          await methodChannel.invokeMethod('dlna:getList');
+      return devices;
+    } on Exception catch (_) {
+      return [];
+    }
   }
 
   static search() async {

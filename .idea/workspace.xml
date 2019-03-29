@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/player.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/BrowseRegistryListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/BrowseRegistryListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/DdPlayerPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/DdPlayerPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/dlna.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/dlna.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -24,30 +26,31 @@
     <session id="-1997377800">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="13" />
+          <entry key="project.closed" value="15" />
           <entry key="project.open.time.1" value="6" />
-          <entry key="project.open.time.2" value="5" />
+          <entry key="project.open.time.2" value="6" />
+          <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="14" />
+          <entry key="project.opened" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="2670" />
+          <entry key="dart" value="2767" />
           <entry key="gradle" value="1" />
           <entry key="java" value="172" />
-          <entry key="txt" value="51" />
+          <entry key="txt" value="62" />
           <entry key="xml" value="4" />
           <entry key="yaml" value="48" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="2670" />
+          <entry key="Dart" value="2767" />
           <entry key="Groovy" value="1" />
           <entry key="JAVA" value="172" />
-          <entry key="PLAIN_TEXT" value="51" />
+          <entry key="PLAIN_TEXT" value="62" />
           <entry key="XML" value="4" />
           <entry key="YAML" value="48" />
         </counts>
@@ -58,10 +61,10 @@
           <entry key="gitignore" value="1" />
           <entry key="gradle" value="6" />
           <entry key="iml" value="4" />
-          <entry key="java" value="8" />
+          <entry key="java" value="9" />
           <entry key="lock" value="1" />
           <entry key="properties" value="5" />
-          <entry key="xml" value="2" />
+          <entry key="xml" value="3" />
           <entry key="yaml" value="3" />
         </counts>
       </usages-collector>
@@ -70,71 +73,17 @@
           <entry key="Dart" value="46" />
           <entry key="Groovy" value="6" />
           <entry key="IDEA_MODULE" value="4" />
-          <entry key="JAVA" value="8" />
+          <entry key="JAVA" value="9" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Properties" value="5" />
-          <entry key="XML" value="2" />
+          <entry key="XML" value="3" />
           <entry key="YAML" value="3" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/dlna.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/player.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="236" column="13" selection-start-line="236" selection-start-column="13" selection-end-line="236" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-                <element signature="e#602#1813#0" />
-                <element signature="e#858#1189#0" />
-                <element signature="e#7744#8897#0" />
-                <element signature="e#9295#9804#0" />
-                <element signature="e#9872#10263#0" />
-                <element signature="e#10310#10624#0" />
-                <element signature="e#10655#11316#0" />
-                <element signature="e#11342#16949#0" />
-                <element signature="e#16974#17325#0" />
-                <element signature="e#17368#17502#0" />
-                <element signature="e#17594#17851#0" />
-                <element signature="e#17882#18923#0" />
-                <element signature="e#18957#20463#0" />
-                <element signature="e#20489#20560#0" />
-                <element signature="e#20585#20888#0" />
-                <element signature="e#20910#21003#0" />
-                <element signature="e#21031#21872#0" />
-                <element signature="e#21899#22155#0" />
-                <element signature="e#22179#22291#0" />
-                <element signature="e#22318#22441#0" />
-                <element signature="e#22464#22674#0" />
-                <element signature="e#22698#22929#0" />
-                <element signature="e#22951#23024#0" />
-                <element signature="e#23051#23353#0" />
-                <element signature="e#23378#23474#0" />
-                <element signature="e#23499#23595#0" />
-                <element signature="e#23623#23895#0" />
-                <element signature="e#23928#24130#0" />
-                <element signature="e#24154#24284#0" />
-                <element signature="e#24347#24854#0" />
-                <element signature="e#24914#26049#0" />
-                <element signature="e#26084#26752#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -184,8 +133,8 @@
         <option value="$PROJECT_DIR$/lib/volume.dart" />
         <option value="$PROJECT_DIR$/lib/screen.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
-        <option value="$PROJECT_DIR$/lib/dlna.dart" />
         <option value="$PROJECT_DIR$/lib/player.dart" />
+        <option value="$PROJECT_DIR$/lib/dlna.dart" />
       </list>
     </option>
   </component>
@@ -198,6 +147,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -247,8 +198,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -341,11 +290,19 @@
       <option name="project" value="LOCAL" />
       <updated>1553518711293</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="避免部分机型闪退">
+      <created>1553828586539</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1553828586539</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2026862" />
       <window_info id="Captures" order="1" side_tool="true" />
@@ -384,20 +341,14 @@
     <MESSAGE value="添加亮度和音量控制" />
     <MESSAGE value="添加进度控制" />
     <MESSAGE value="修改官方核心代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改官方核心代码" />
+    <MESSAGE value="避免部分机型闪退" />
+    <option name="LAST_COMMIT_MESSAGE" value="避免部分机型闪退" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/example/android/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
           <caret line="30" column="36" lean-forward="true" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/BrowseRegistryListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-644">
-          <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -431,13 +382,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
@@ -536,52 +480,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/dlna.dart">
+    <entry file="file://$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/BrowseRegistryListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="-217">
+          <caret line="30" column="23" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/player.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
+        <state relative-caret-position="188">
           <caret line="236" column="13" selection-start-line="236" selection-start-column="13" selection-end-line="236" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#602#1813#0" />
-            <element signature="e#858#1189#0" />
-            <element signature="e#7744#8897#0" />
-            <element signature="e#9295#9804#0" />
-            <element signature="e#9872#10263#0" />
-            <element signature="e#10310#10624#0" />
-            <element signature="e#10655#11316#0" />
-            <element signature="e#11342#16949#0" />
-            <element signature="e#16974#17325#0" />
-            <element signature="e#17368#17502#0" />
-            <element signature="e#17594#17851#0" />
-            <element signature="e#17882#18923#0" />
-            <element signature="e#18957#20463#0" />
-            <element signature="e#20489#20560#0" />
-            <element signature="e#20585#20888#0" />
-            <element signature="e#20910#21003#0" />
-            <element signature="e#21031#21872#0" />
-            <element signature="e#21899#22155#0" />
-            <element signature="e#22179#22291#0" />
-            <element signature="e#22318#22441#0" />
-            <element signature="e#22464#22674#0" />
-            <element signature="e#22698#22929#0" />
-            <element signature="e#22951#23024#0" />
-            <element signature="e#23051#23353#0" />
-            <element signature="e#23378#23474#0" />
-            <element signature="e#23499#23595#0" />
-            <element signature="e#23623#23895#0" />
-            <element signature="e#23928#24130#0" />
-            <element signature="e#24154#24284#0" />
-            <element signature="e#24347#24854#0" />
-            <element signature="e#24914#26049#0" />
-            <element signature="e#26084#26752#0" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/dlna.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
         </state>
       </provider>
     </entry>

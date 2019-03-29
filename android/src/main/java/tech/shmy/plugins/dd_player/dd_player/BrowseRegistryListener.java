@@ -13,10 +13,10 @@ import java.util.HashMap;
 import io.flutter.plugin.common.EventChannel.EventSink;
 
 public class BrowseRegistryListener extends DefaultRegistryListener {
-    private ArrayList<Device> mDeviceList = new ArrayList<>();
-    private ArrayList<HashMap> flutterDeviceList = new ArrayList<>();
+    private ArrayList<Device> mDeviceList = new ArrayList<Device>();
+    private ArrayList<HashMap> flutterDeviceList = new ArrayList<HashMap>();
     private static final ServiceType AV_TRANSPORT_SERVICE = new UDAServiceType("AVTransport");
-    public static EventSink eventSink;
+    static EventSink eventSink;
     Service getDeviceForUuid(String uuid) {
         int i = 0;
         for (; i < mDeviceList.size(); i ++) {

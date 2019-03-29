@@ -71,8 +71,8 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         } else if (call.method.equals("dlna:stop")) {
             this.stop();
         } else if (call.method.equals("dlna:playUrl")) {
-            String url = Objects.requireNonNull(call.argument("url")).toString();
-            String uuid = Objects.requireNonNull(call.argument("uuid")).toString();
+            String url = call.argument("url").toString();
+            String uuid = call.argument("uuid").toString();
             this.playUrl(uuid, url);
         } else if (call.method.equals("dlna:getList")) {
             result.success(browseRegistryListener.getDevices());
@@ -108,73 +108,92 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
     public void onCancel(Object arguments) {
         System.out.println("-- onCancel -----");
         BrowseRegistryListener.eventSink = null;
-//    this.stop();
     }
 
     private void search() {
-        if (isSearchStrarted) {
-            return;
+        try {
+            if (isSearchStrarted) {
+                return;
+            }
+            System.out.println("-- start ---serviceConnection-----");
+            serviceConnection = new ServiceConnection() {
+
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    try {
+                        androidUpnpService = (AndroidUpnpService) service;
+                        System.out.println("---got a androidUpnpService-----");
+                        androidUpnpService.getRegistry().addListener(browseRegistryListener);
+                        androidUpnpService.getControlPoint().search();
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+
+                @Override
+                public void onServiceDisconnected(ComponentName name) {
+                    System.out.println(name);
+                }
+            };
+            isSearchStrarted = this.context.getApplicationContext().bindService(new Intent(this.activity, AndroidUpnpServiceImpl.class),
+                    serviceConnection, Context.BIND_AUTO_CREATE);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        System.out.println("-- start ---serviceConnection-----");
-        serviceConnection = new ServiceConnection() {
-
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                androidUpnpService = (AndroidUpnpService) service;
-                System.out.println("---got a androidUpnpService-----");
-                androidUpnpService.getRegistry().addListener(browseRegistryListener);
-                androidUpnpService.getControlPoint().search();
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-                System.out.println(name);
-            }
-        };
-        isSearchStrarted = this.context.getApplicationContext().bindService(new Intent(this.activity, AndroidUpnpServiceImpl.class),
-                serviceConnection, Context.BIND_AUTO_CREATE);
     }
 
     private void playUrl(String uuid, String url) {
-        final DdPlayerPlugin c = this;
-        final Service avtService = browseRegistryListener.getDeviceForUuid(uuid);
-        androidUpnpService.getControlPoint().execute(new SetAVTransportURI(avtService, url) {
-            @Override
-            public void success(ActionInvocation invocation) {
-                System.out.println("setUrl success:--defaultMsg--" + invocation.toString());
-                c.doPlay(avtService);
-            }
+        try {
+            final DdPlayerPlugin c = this;
+            final Service avtService = browseRegistryListener.getDeviceForUuid(uuid);
+            androidUpnpService.getControlPoint().execute(new SetAVTransportURI(avtService, url) {
+                @Override
+                public void success(ActionInvocation invocation) {
+                    System.out.println("setUrl success:--defaultMsg--" + invocation.toString());
+                    c.doPlay(avtService);
+                }
 
-            @Override
-            public void failure(ActionInvocation invocation, UpnpResponse operation, String defaultMsg) {
-                System.out.println("setUrl err --defaultMsg--" + defaultMsg);
-            }
-        });
+                @Override
+                public void failure(ActionInvocation invocation, UpnpResponse operation, String defaultMsg) {
+                    System.out.println("setUrl err --defaultMsg--" + defaultMsg);
+                }
+            });
 
-        System.out.println(url);
+            System.out.println(url);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void stop() {
-        if (serviceConnection != null) {
-            System.out.println("---stop service---");
-            this.context.getApplicationContext().unbindService(serviceConnection);
-            serviceConnection = null;
-            isSearchStrarted = false;
+        try {
+            if (serviceConnection != null) {
+                System.out.println("---stop service---");
+                this.context.getApplicationContext().unbindService(serviceConnection);
+                serviceConnection = null;
+                isSearchStrarted = false;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
     private void doPlay(Service avtService) {
-        androidUpnpService.getControlPoint().execute(new Play(avtService) {
-            @Override
-            public void success(ActionInvocation invocation) {
-                System.out.println("play success:--defaultMsg--" + invocation.toString());
-            }
+        try {
+            androidUpnpService.getControlPoint().execute(new Play(avtService) {
+                @Override
+                public void success(ActionInvocation invocation) {
+                    System.out.println("play success:--defaultMsg--" + invocation.toString());
+                }
 
-            @Override
-            public void failure(ActionInvocation invocation, UpnpResponse operation, String defaultMsg) {
-                System.out.println("play err:--defaultMsg--" + defaultMsg);
-            }
-        });
+                @Override
+                public void failure(ActionInvocation invocation, UpnpResponse operation, String defaultMsg) {
+                    System.out.println("play err:--defaultMsg--" + defaultMsg);
+                }
+            });
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void setNormallyOn() {
@@ -186,10 +205,12 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         Window window = this.activity.getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
+
     private int getBrightness() {
         Window window = this.activity.getWindow();
         return (int) (window.getAttributes().screenBrightness * 100.0F);
     }
+
     private int incrementBrightness() {
         int val = this.getBrightness() + 5;
         if (val >= 100) {
@@ -197,6 +218,7 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         }
         return this.setBrightness(val);
     }
+
     private int decrementBrightness() {
         int val = this.getBrightness() - 5;
         if (val <= 5) {
@@ -204,17 +226,20 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         }
         return this.setBrightness(val);
     }
+
     private int setBrightness(int val) {
         Window window = this.activity.getWindow();
         WindowManager.LayoutParams localLayoutParams = window.getAttributes();
-        localLayoutParams.screenBrightness  = val / 100.0F;
+        localLayoutParams.screenBrightness = val / 100.0F;
         window.setAttributes(localLayoutParams);
         return val;
     }
+
     private int getCurrentVolume() {
         //当前音量
         return this.mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
     }
+
     private int getMaxVolume() {
         return this.mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
     }
@@ -228,9 +253,8 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         return this.getCurrentVolume();
     }
 
-    @TargetApi(Build.VERSION_CODES.P)
     private int decrementVolume() {
-        int minVolume = this.mAudioManager.getStreamMinVolume(AudioManager.STREAM_MUSIC);
+        int minVolume = 0;
         if (this.getCurrentVolume() <= minVolume) {
             return minVolume;
         }

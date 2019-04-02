@@ -32,6 +32,10 @@ public class BrowseRegistryListener extends DefaultRegistryListener {
     ArrayList<HashMap> getDevices() {
         return this.flutterDeviceList;
     }
+    void clearDevices() {
+        this.mDeviceList.clear();
+        this.flutterDeviceList.clear();
+    }
     @Override
     public void deviceAdded(Registry registry, Device device) {
         URL ip = device.getDetails().getBaseURL();

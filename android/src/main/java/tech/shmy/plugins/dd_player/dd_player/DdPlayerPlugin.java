@@ -171,6 +171,7 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
                 this.context.getApplicationContext().unbindService(serviceConnection);
                 serviceConnection = null;
                 isSearchStrarted = false;
+                browseRegistryListener.clearDevices();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

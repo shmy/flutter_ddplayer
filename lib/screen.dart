@@ -20,4 +20,7 @@ class DdPlayerScreen {
   static Future<int> decrementBrightness() async {
     return await methodChannel.invokeMethod('screen:decrementBrightness');
   }
+  static enterPip() async {
+    return await methodChannel.invokeMethod('screen:enterPip');
+  }
 }

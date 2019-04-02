@@ -1,4 +1,5 @@
 import 'package:dd_player/player.dart';
+import 'package:dd_player/screen.dart';
 import 'package:flutter/material.dart';
 class  Player extends StatelessWidget {
   @override
@@ -7,8 +8,15 @@ class  Player extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: DdPlayer(url: "https://hair.jingpin88.com/20171029/Fillu3JT/index.m3u8",),
+        body: ListView(
+          children: <Widget>[
+            DdPlayer(url: "https://hair.jingpin88.com/20171029/Fillu3JT/index.m3u8",),
+            MaterialButton(
+                child: Text("pip"),
+                onPressed: () {
+                  DdPlayerScreen.enterPip();
+                }),
+          ],
         ),
     );
   }

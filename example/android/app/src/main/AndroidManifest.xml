@@ -11,6 +11,9 @@
         android:label="dd_player_example"
         android:icon="@mipmap/ic_launcher">
         <activity
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

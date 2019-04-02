@@ -16,7 +16,7 @@ public class BrowseRegistryListener extends DefaultRegistryListener {
     private ArrayList<Device> mDeviceList = new ArrayList<Device>();
     private ArrayList<HashMap> flutterDeviceList = new ArrayList<HashMap>();
     private static final ServiceType AV_TRANSPORT_SERVICE = new UDAServiceType("AVTransport");
-    static EventSink eventSink;
+    public static EventSink eventSink;
     Service getDeviceForUuid(String uuid) {
         int i = 0;
         for (; i < mDeviceList.size(); i ++) {

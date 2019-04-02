@@ -1,3 +1,4 @@
+import 'package:dd_player/screen.dart';
 import 'package:dd_player_example/player.dart';
 import 'package:flutter/material.dart';
 
@@ -29,14 +30,21 @@ class _MyAppState extends State<MyApp> {
 }
 class IndexPage extends StatelessWidget {
   Widget build (BuildContext context) {
-    return Center(
-      child: MaterialButton(
-          child: Text("press me"),
-          onPressed: () {
-            Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-              return new Player();
-            }));
-          }),
+    return ListView(
+      children: [
+        MaterialButton(
+            child: Text("press me"),
+            onPressed: () {
+              Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+                return new Player();
+              }));
+            }),
+        MaterialButton(
+            child: Text("pip"),
+            onPressed: () {
+              DdPlayerScreen.enterPip();
+            }),
+      ]
     );
   }
 }

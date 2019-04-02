@@ -1,6 +1,5 @@
 package tech.shmy.plugins.dd_player.dd_player;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -20,8 +19,7 @@ import org.fourthline.cling.model.meta.Service;
 import org.fourthline.cling.support.avtransport.callback.Play;
 import org.fourthline.cling.support.avtransport.callback.SetAVTransportURI;
 
-import java.util.Objects;
-
+import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -50,7 +48,6 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         this.activity = activity;
         this.context = context;
         this.mAudioManager = (AudioManager) this.context.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-
     }
 
     /**
@@ -86,6 +83,8 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
             result.success(this.incrementBrightness());
         } else if (call.method.equals("screen:decrementBrightness")) {
             result.success(this.decrementBrightness());
+        } else if (call.method.equals("screen:enterPip")) {
+            this.enterPip();
         } else if (call.method.equals("volume:getCurrentVolume")) {
             result.success(this.getCurrentVolume());
         } else if (call.method.equals("volume:getMaxVolume")) {
@@ -260,5 +259,10 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         }
         this.mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_LOWER, 0);
         return this.getCurrentVolume();
+    }
+
+    private void enterPip() {
+        if (Build.VERSION.SDK_INT > 24)
+            this.activity.enterPictureInPictureMode();
     }
 }

@@ -21,7 +21,7 @@ class DdPlayer extends StatefulWidget {
       @required this.url,
       this.thumbnail,
       this.listener,
-      this.enableDLNA = false});
+      this.enableDLNA = true});
 
   @override
   _DdPlayer createState() => _DdPlayer();

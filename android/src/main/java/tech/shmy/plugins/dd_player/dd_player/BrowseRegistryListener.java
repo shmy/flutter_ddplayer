@@ -7,6 +7,7 @@ import org.fourthline.cling.model.types.UDAServiceType;
 import org.fourthline.cling.registry.DefaultRegistryListener;
 import org.fourthline.cling.registry.Registry;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,11 +34,15 @@ public class BrowseRegistryListener extends DefaultRegistryListener {
     }
     @Override
     public void deviceAdded(Registry registry, Device device) {
+        URL ip = device.getDetails().getBaseURL();
+        if (ip == null) {
+            return;
+        }
         HashMap fd = new HashMap();
         fd.put("name", device.getDetails().getFriendlyName());
 //        fd.put("display", device.getDisplayString());
         fd.put("uuid", device.getIdentity().getUdn().getIdentifierString());
-        fd.put("ip", device.getDetails().getBaseURL().toString());
+        fd.put("ip", ip.toString());
         if (flutterDeviceList.indexOf(fd) != -1) {
             return;
         }

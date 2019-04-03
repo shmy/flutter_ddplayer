@@ -288,7 +288,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     if (_videoPlayerController != null) {
       _videoPlayerController.removeListener(listener);
     }
-    DdPlayerDlna.stop();
+//    DdPlayerDlna.stop();
   }
 
   void _initPlatCode() {
@@ -300,6 +300,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     int cv = await DdPlayerVolume.currentVolume;
     int mv = await DdPlayerVolume.maxVolume;
     int cb = await DdPlayerScreen.currentBrightness;
+    if (!mounted) {
+      return;
+    }
     setState(() {
       _currentVolume = cv;
       _maxVolume = mv;
@@ -364,6 +367,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     });
     DdPlayerDlna.search();
     List<dynamic> data = await DdPlayerDlna.devices;
+    if (!mounted) {
+      return;
+    }
     setState(() {
       _devices = data;
     });

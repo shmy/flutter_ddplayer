@@ -21,12 +21,14 @@ class DdPlayerDlna {
     }
   }
 
-  static search() async {
+  static Future<Null> search() async {
     await methodChannel.invokeMethod('dlna:search');
+    return null;
   }
 
-  static stop() async {
+  static Future<Null> stop() async {
     await methodChannel.invokeMethod('dlna:stop');
+    return null;
   }
 
   static playUrl(String uuid, String url) async {

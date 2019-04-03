@@ -64,9 +64,9 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
     @Override
     public void onMethodCall(MethodCall call, Result result) {
         if (call.method.equals("dlna:search")) {
-            this.search();
+            result.success(this.search());
         } else if (call.method.equals("dlna:stop")) {
-            this.stop();
+            result.success(this.stop());
         } else if (call.method.equals("dlna:playUrl")) {
             String url = call.argument("url").toString();
             String uuid = call.argument("uuid").toString();
@@ -109,10 +109,10 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         BrowseRegistryListener.eventSink = null;
     }
 
-    private void search() {
+    private boolean search() {
         try {
             if (isSearchStrarted) {
-                return;
+                return isSearchStrarted;
             }
             System.out.println("-- start ---serviceConnection-----");
             serviceConnection = new ServiceConnection() {
@@ -139,6 +139,7 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return isSearchStrarted;
     }
 
     private void playUrl(String uuid, String url) {
@@ -164,7 +165,7 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         }
     }
 
-    private void stop() {
+    private boolean stop() {
         try {
             if (serviceConnection != null) {
                 System.out.println("---stop service---");
@@ -176,6 +177,7 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return !isSearchStrarted;
     }
 
     private void doPlay(Service avtService) {

@@ -265,7 +265,11 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
     }
 
     private void enterPip() {
-        if (Build.VERSION.SDK_INT > 24)
-            this.activity.enterPictureInPictureMode();
+        try {
+            if (Build.VERSION.SDK_INT > 24)
+                this.activity.enterPictureInPictureMode();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

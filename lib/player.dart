@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dd_player/lifecycle_event_handler.dart';
 import 'package:dd_player/screen.dart';
 import 'package:dd_player/volume.dart';
 import 'package:flutter/cupertino.dart';
@@ -116,7 +117,6 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   Function get _listener => widget.listener;
 
   bool get _enableDLNA => widget.enableDLNA;
-
   bool _isHiddenControls = true;
   bool _isLocked = false;
   bool _isShowPopup = false;
@@ -144,7 +144,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   bool _showVolumeInfo = false;
   bool _showPositionInfo = false;
   int _preLoadPosition = 0;
-
+//  WidgetsBindingObserver _widgetsBindingObserver;
   Widget build(BuildContext context) {
     if (_videoPlayerController?.value != null) {
       if (_videoPlayerController.value.initialized) {
@@ -245,6 +245,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
         ..addListener(listener)
         ..setVolume(1.0);
     }
+//    _widgetsBindingObserver = LifecycleEventHandler(cb: _lifecycleEventHandler);
+//    // 生命周期钩子
+//    WidgetsBinding.instance.addObserver(_widgetsBindingObserver);
     // 避免内存泄漏
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       _initPlatCode();
@@ -256,7 +259,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     if (_listener != null) {
       _listener(_videoPlayerController);
     }
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -273,6 +278,10 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
+//    if (_widgetsBindingObserver != null) {
+//      WidgetsBinding.instance.removeObserver(_widgetsBindingObserver);
+//    }
+
     if (_timer != null) {
       _timer.cancel();
     }
@@ -377,14 +386,14 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   }
 
   Widget _buildThumbnail(Widget thumbnailBg, Widget child) {
-    var height = _isFullScreenMode
-        ? MediaQuery.of(context).size.height
-        : MediaQuery.of(context).size.height / 3;
-    var width = MediaQuery.of(context).size.width;
+//    var height = _isFullScreenMode
+//        ? MediaQuery.of(context).size.height
+//        : MediaQuery.of(context).size.height / 3;
+//    var width = MediaQuery.of(context).size.width;
     return Container(
       color: Colors.black,
-      height: height,
-      width: width,
+//      height: height,
+//      width: width,
       child: Stack(
         children: <Widget>[
           Positioned.fill(child: thumbnailBg),
@@ -461,7 +470,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
       color: Colors.black,
       height: _isFullScreenMode
           ? MediaQuery.of(context).size.height
-          : MediaQuery.of(context).size.height / 3,
+          : double.infinity,
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: <Widget>[
@@ -671,7 +680,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
       height: 45.0,
       color: Colors.transparent,
       padding: EdgeInsets.only(left: 10.0, right: 10.0),
-      margin: EdgeInsets.only(top: _isFullScreenMode ? 0.0 : 30.0),
+//      margin: EdgeInsets.only(top: _isFullScreenMode ? 0.0 : 30.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -1006,6 +1015,22 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
     return formattedTime;
   }
+//  void _lifecycleEventHandler(AppLifecycleState state) {
+//    // 设置后台状态
+//    var isBackgroundMode = true;
+//    if (state == AppLifecycleState.resumed) {
+//      isBackgroundMode = false;
+//    }
+//    if (isBackgroundMode) {
+//      _enterFullScreen();
+//      DdPlayerScreen.enterPip();
+//    } else {
+//      if (_isFullScreenMode) {
+//        _exitFullScreen();
+//      }
+//    }
+//    print(state);
+//  }
 }
 
 class PlayerPopupAnimated extends AnimatedWidget {

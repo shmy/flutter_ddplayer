@@ -1,6 +1,7 @@
 package tech.shmy.plugins.dd_player.dd_player;
 
 import android.app.Activity;
+import android.app.PictureInPictureParams;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.ServiceConnection;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Rational;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -84,7 +86,9 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         } else if (call.method.equals("screen:decrementBrightness")) {
             result.success(this.decrementBrightness());
         } else if (call.method.equals("screen:enterPip")) {
-            this.enterPip();
+            int numerator = call.argument("numerator");
+            int denominator = call.argument("denominator");
+            this.enterPip(numerator, denominator);
         } else if (call.method.equals("volume:getCurrentVolume")) {
             result.success(this.getCurrentVolume());
         } else if (call.method.equals("volume:getMaxVolume")) {
@@ -264,10 +268,16 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
         return this.getCurrentVolume();
     }
 
-    private void enterPip() {
+    private void enterPip(int numerator, int denominator) {
         try {
-            if (Build.VERSION.SDK_INT > 24)
-                this.activity.enterPictureInPictureMode();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                System.out.println("-------------");
+                System.out.println(numerator);
+                System.out.println(denominator);
+                PictureInPictureParams params = new PictureInPictureParams.Builder()
+                        .setAspectRatio(new Rational(numerator, denominator)).build();
+                this.activity.enterPictureInPictureMode(params);
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

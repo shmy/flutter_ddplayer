@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/player.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/DdPlayerPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/DdPlayerPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screen.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -24,20 +25,21 @@
     <session id="-1997377800">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="27" />
+          <entry key="project.closed" value="28" />
           <entry key="project.open.time.1" value="9" />
+          <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.2" value="9" />
           <entry key="project.open.time.20" value="2" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.3" value="4" />
           <entry key="project.open.time.6" value="2" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="28" />
+          <entry key="project.opened" value="29" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="3610" />
+          <entry key="dart" value="3676" />
           <entry key="gradle" value="1" />
           <entry key="java" value="247" />
           <entry key="txt" value="69" />
@@ -47,7 +49,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="3610" />
+          <entry key="Dart" value="3676" />
           <entry key="Groovy" value="1" />
           <entry key="JAVA" value="247" />
           <entry key="PLAIN_TEXT" value="69" />
@@ -57,11 +59,11 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="dart" value="80" />
+          <entry key="dart" value="86" />
           <entry key="gitignore" value="1" />
           <entry key="gradle" value="6" />
           <entry key="iml" value="4" />
-          <entry key="java" value="19" />
+          <entry key="java" value="20" />
           <entry key="lock" value="1" />
           <entry key="properties" value="5" />
           <entry key="xml" value="5" />
@@ -70,10 +72,10 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Dart" value="80" />
+          <entry key="Dart" value="86" />
           <entry key="Groovy" value="6" />
           <entry key="IDEA_MODULE" value="4" />
-          <entry key="JAVA" value="19" />
+          <entry key="JAVA" value="20" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Properties" value="5" />
           <entry key="XML" value="5" />
@@ -83,40 +85,29 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/lib/player.dart">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="252">
-                  <caret line="1039" column="38" lean-forward="true" selection-start-line="1039" selection-start-column="10" selection-end-line="1039" selection-end-column="38" />
-                  <folding>
-                    <element signature="e#0#20#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/lib/player.dart">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="183">
-                  <caret line="1032" column="25" selection-start-line="1032" selection-start-column="25" selection-end-line="1032" selection-end-column="25" />
-                  <folding>
-                    <element signature="e#0#20#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/player.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="1053" column="28" selection-start-line="1053" selection-start-column="28" selection-end-line="1053" selection-end-column="28" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/screen.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="22" column="37" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -129,10 +120,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>_showVolumeInfo</find>
-      <find>slider</find>
-      <find>listen</find>
-      <find>listener</find>
       <find>currentVolume</find>
       <find>_currentBrightness</find>
       <find>isBuff</find>
@@ -158,7 +145,11 @@
       <find>_format</find>
       <find>back</find>
       <find>setst</find>
+      <find>addl</find>
       <find>_isBackgroundMode</find>
+      <find>VideoPlay</find>
+      <find>VideoPlayer(</find>
+      <find>enterpip</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -176,7 +167,6 @@
         <option value="$PROJECT_DIR$/lib/volume.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/lib/dlna.dart" />
-        <option value="$PROJECT_DIR$/lib/screen.dart" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
         <option value="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/example/lib/player.dart" />
@@ -184,6 +174,7 @@
         <option value="$PROJECT_DIR$/lib/lifecycle_event_handler.dart" />
         <option value="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/DdPlayerPlugin.java" />
         <option value="$PROJECT_DIR$/lib/player.dart" />
+        <option value="$PROJECT_DIR$/lib/screen.dart" />
       </list>
     </option>
   </component>
@@ -196,6 +187,24 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="dd_player" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="dd_player" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="lib" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -229,24 +238,6 @@
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="dd_player" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="dd_player" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="lib" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -367,14 +358,21 @@
       <option name="project" value="LOCAL" />
       <updated>1554348468149</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add pip">
+      <created>1554359908075</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1554359908075</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17704518" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17704518" />
       <window_info id="Captures" order="1" side_tool="true" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -383,7 +381,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.376556" />
-      <window_info active="true" anchor="bottom" id="Run" order="1" visible="true" weight="0.35684648" />
+      <window_info anchor="bottom" id="Run" order="1" weight="0.35684648" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="4" weight="0.32987553" />
@@ -506,13 +504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/dlna.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -551,13 +542,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/screen.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/flutter/bin/cache/pkg/sky_engine/lib/ui/window.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-408">
@@ -586,10 +570,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/DdPlayerPlugin.java">
+    <entry file="file://$USER_HOME$/flutter/bin/cache/pkg/sky_engine/lib/async/timer.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="263" column="16" selection-start-line="263" selection-start-column="16" selection-end-line="263" selection-end-column="16" />
+        <state relative-caret-position="192">
+          <caret line="85" column="14" selection-start-line="85" selection-start-column="14" selection-end-line="85" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -600,17 +584,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/flutter/bin/cache/pkg/sky_engine/lib/async/timer.dart">
+    <entry file="file://$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/DdPlayerPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="85" column="14" selection-start-line="85" selection-start-column="14" selection-end-line="85" selection-end-column="14" />
+        <state relative-caret-position="215">
+          <caret line="262" column="29" lean-forward="true" selection-start-line="262" selection-start-column="29" selection-end-line="262" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/flutter/.pub-cache/git/video_player_flutter-bf6c7ba4d81b5094965df6276e42ef2867bc3445/lib/video_player.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="92" column="13" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/dlna.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-159">
+          <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/screen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="22" column="37" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/player.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="1039" column="38" lean-forward="true" selection-start-line="1039" selection-start-column="10" selection-end-line="1039" selection-end-column="38" />
+        <state relative-caret-position="231">
+          <caret line="1053" column="28" selection-start-line="1053" selection-start-column="28" selection-end-line="1053" selection-end-column="28" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>

@@ -144,7 +144,10 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   bool _showVolumeInfo = false;
   bool _showPositionInfo = false;
   int _preLoadPosition = 0;
-//  WidgetsBindingObserver _widgetsBindingObserver;
+
+  bool _isBackgroundMode = false;
+  WidgetsBindingObserver _widgetsBindingObserver;
+
   Widget build(BuildContext context) {
     if (_videoPlayerController?.value != null) {
       if (_videoPlayerController.value.initialized) {
@@ -245,9 +248,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
         ..addListener(listener)
         ..setVolume(1.0);
     }
-//    _widgetsBindingObserver = LifecycleEventHandler(cb: _lifecycleEventHandler);
-//    // 生命周期钩子
-//    WidgetsBinding.instance.addObserver(_widgetsBindingObserver);
+    _widgetsBindingObserver = LifecycleEventHandler(cb: _lifecycleEventHandler);
+    // 生命周期钩子
+    WidgetsBinding.instance.addObserver(_widgetsBindingObserver);
     // 避免内存泄漏
     WidgetsBinding.instance.addPostFrameCallback((callback) {
       _initPlatCode();
@@ -260,7 +263,11 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
       _listener(_videoPlayerController);
     }
     if (mounted) {
-      setState(() {});
+      try {
+        setState(() {});
+      } catch (e) {
+        //
+      }
     }
   }
 
@@ -278,9 +285,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
-//    if (_widgetsBindingObserver != null) {
-//      WidgetsBinding.instance.removeObserver(_widgetsBindingObserver);
-//    }
+    if (_widgetsBindingObserver != null) {
+      WidgetsBinding.instance.removeObserver(_widgetsBindingObserver);
+    }
 
     if (_timer != null) {
       _timer.cancel();
@@ -628,7 +635,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
             animation: _animation,
             width: _popupWidth,
             child:
-            _popupType == _PopupType.dlna ? _buildDlna() : _emptyWidget(),
+                _popupType == _PopupType.dlna ? _buildDlna() : _emptyWidget(),
           ),
         ],
       ),
@@ -694,7 +701,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
               _isFullScreenMode
                   ? _buildControlIconButton(Icons.rotate_left, _rotateScreen)
                   : _emptyWidget(),
-              _enableDLNA ?  _buildControlIconButton(Icons.tv, _enterDlna, 20) : _emptyWidget(),
+              _enableDLNA
+                  ? _buildControlIconButton(Icons.tv, _enterDlna, 20)
+                  : _emptyWidget(),
 //              _isFullScreenMode
 //                  ? _buildControlIconButton(Icons.tv, _enterDlna, 20)
 //                  : _emptyWidget(),
@@ -1015,22 +1024,41 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
     return formattedTime;
   }
-//  void _lifecycleEventHandler(AppLifecycleState state) {
-//    // 设置后台状态
-//    var isBackgroundMode = true;
-//    if (state == AppLifecycleState.resumed) {
-//      isBackgroundMode = false;
-//    }
-//    if (isBackgroundMode) {
-//      _enterFullScreen();
-//      DdPlayerScreen.enterPip();
-//    } else {
-//      if (_isFullScreenMode) {
-//        _exitFullScreen();
-//      }
-//    }
-//    print(state);
-//  }
+
+  void _lifecycleEventHandler(AppLifecycleState state) {
+    print("========$state=======");
+
+    if (state == AppLifecycleState.inactive) {
+      if (!_isBackgroundMode) {
+        _isBackgroundMode = true;
+        _enterPip();
+      }
+    } else if (state == AppLifecycleState.resumed) {
+      if (_isBackgroundMode) {
+        _isBackgroundMode = false;
+        if (!_isFullScreenMode && mounted) {
+          Navigator.of(context).pop();
+        }
+      }
+    }
+  }
+
+  void _enterPip() {
+    if (!_isFullScreenMode) {
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => Scaffold(
+                body: VideoView(
+                  controller: _videoPlayerController,
+                  isFullScreenMode: true,
+                  thumbnail: _thumbnail,
+                  listener: _listener,
+                  enableDLNA: _enableDLNA,
+                ),
+              )));
+    }
+
+    DdPlayerScreen.enterPip();
+  }
 }
 
 class PlayerPopupAnimated extends AnimatedWidget {

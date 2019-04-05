@@ -1050,8 +1050,8 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
             );
           }));
     }
+    // TODO 自动调整显示比例 当播放器初始化成功后
     DdPlayerScreen.enterPip();
-//    Future.delayed(Duration(microseconds: 300), () => DdPlayerScreen.enterPip());
   }
 
   PageRouteBuilder _noTransitionPageRoute(

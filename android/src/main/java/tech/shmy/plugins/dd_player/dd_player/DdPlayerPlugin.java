@@ -274,6 +274,9 @@ public class DdPlayerPlugin implements MethodCallHandler, StreamHandler {
                 System.out.println("-------------");
                 System.out.println(numerator);
                 System.out.println(denominator);
+
+                // 如果有启动图 必须清除 否则Pip会有边框
+                this.activity.getWindow().setBackgroundDrawable(null);
                 PictureInPictureParams params = new PictureInPictureParams.Builder()
                         .setAspectRatio(new Rational(numerator, denominator)).build();
                 this.activity.enterPictureInPictureMode(params);

@@ -792,29 +792,19 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     SystemChrome.setEnabledSystemUIOverlays([]);
     // 设置横屏
     SystemChrome.setPreferredOrientations([_defaultFullScreenOrientation]);
-    await Navigator.of(context).push(PageRouteBuilder(
-      settings: RouteSettings(isInitialRoute: false),
-      pageBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Animation<double> secondaryAnimation,
-      ) {
-        return AnimatedBuilder(
-          animation: animation,
-          builder: (BuildContext context, Widget child) {
-            return Scaffold(
-              body: VideoView(
-                controller: _videoPlayerController,
-                isFullScreenMode: true,
-                thumbnail: _thumbnail,
-                listener: _listener,
-                enableDLNA: _enableDLNA,
-              ),
-            );
-          },
-        );
-      },
-    ));
+    await Navigator.of(context).push(_noTransitionPageRoute(
+        context: context,
+        builder: (BuildContext context, Widget child) {
+          return Scaffold(
+            body: VideoView(
+              controller: _videoPlayerController,
+              isFullScreenMode: true,
+              thumbnail: _thumbnail,
+              listener: _listener,
+              enableDLNA: _enableDLNA,
+            ),
+          );
+        }));
     _initDlna();
   }
 
@@ -1030,34 +1020,55 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
 
     if (state == AppLifecycleState.inactive) {
       if (!_isBackgroundMode) {
-        _isBackgroundMode = true;
         _enterPip();
+        _isBackgroundMode = true;
       }
     } else if (state == AppLifecycleState.resumed) {
       if (_isBackgroundMode) {
-        _isBackgroundMode = false;
         if (!_isFullScreenMode && mounted) {
           Navigator.of(context).pop();
         }
+        _isBackgroundMode = false;
       }
     }
   }
 
   void _enterPip() {
     if (!_isFullScreenMode) {
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (_) => Scaffold(
-                body: VideoView(
+      Navigator.of(context).push(_noTransitionPageRoute(
+          context: context,
+          builder: (BuildContext context, Widget child) {
+            return Scaffold(
+              backgroundColor: Theme.of(context).primaryColor,
+              body: VideoView(
                   controller: _videoPlayerController,
                   isFullScreenMode: true,
                   thumbnail: _thumbnail,
                   listener: _listener,
                   enableDLNA: _enableDLNA,
-                ),
-              )));
+              ),
+            );
+          }));
     }
-
     DdPlayerScreen.enterPip();
+//    Future.delayed(Duration(microseconds: 300), () => DdPlayerScreen.enterPip());
+  }
+
+  PageRouteBuilder _noTransitionPageRoute(
+      {@required BuildContext context, @required TransitionBuilder builder}) {
+    return PageRouteBuilder(
+      settings: RouteSettings(isInitialRoute: false),
+      pageBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+      ) {
+        return AnimatedBuilder(
+          animation: animation,
+          builder: builder,
+        );
+      },
+    );
   }
 }
 

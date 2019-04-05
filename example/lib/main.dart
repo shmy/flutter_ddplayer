@@ -39,11 +39,6 @@ class IndexPage extends StatelessWidget {
                 return new Player();
               }));
             }),
-        MaterialButton(
-            child: Text("pip"),
-            onPressed: () {
-              DdPlayerScreen.enterPip();
-            }),
       ]
     );
   }

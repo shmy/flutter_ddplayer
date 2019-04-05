@@ -5,19 +5,10 @@ class  Player extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: ListView(
-          children: <Widget>[
-            DdPlayer(url: "https://hair.jingpin88.com/20171029/Fillu3JT/index.m3u8",),
-            MaterialButton(
-                child: Text("pip"),
-                onPressed: () {
-                  DdPlayerScreen.enterPip();
-                }),
-          ],
-        ),
+//        appBar: AppBar(
+//          title: const Text('Plugin example app'),
+//        ),
+        body: DdPlayer(url: "https://hair.jingpin88.com/20171029/Fillu3JT/index.m3u8",),
     );
   }
 }

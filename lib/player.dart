@@ -16,13 +16,16 @@ class DdPlayer extends StatefulWidget {
   Widget thumbnail;
   Function listener;
   bool enableDLNA;
+  bool enablePip;
 
   DdPlayer(
       {Key key,
       @required this.url,
       this.thumbnail,
       this.listener,
-      this.enableDLNA = true});
+      this.enableDLNA = false,
+      this.enablePip = false,
+      });
 
   @override
   _DdPlayer createState() => _DdPlayer();
@@ -37,6 +40,7 @@ class _DdPlayer extends State<DdPlayer> {
       thumbnail: widget.thumbnail,
       listener: widget.listener,
       enableDLNA: widget.enableDLNA,
+      enablePip: widget.enablePip,
     );
   }
 
@@ -93,6 +97,7 @@ class VideoView extends StatefulWidget {
   Widget thumbnail;
   Function listener;
   bool enableDLNA;
+  bool enablePip;
 
   VideoView({
     Key key,
@@ -101,6 +106,7 @@ class VideoView extends StatefulWidget {
     this.listener,
     this.isFullScreenMode = false,
     this.enableDLNA = false,
+    this.enablePip = false,
   });
 
   @override
@@ -117,6 +123,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   Function get _listener => widget.listener;
 
   bool get _enableDLNA => widget.enableDLNA;
+  bool get _enablePip => widget.enablePip;
   bool _isHiddenControls = true;
   bool _isLocked = false;
   bool _isShowPopup = false;
@@ -802,6 +809,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
               thumbnail: _thumbnail,
               listener: _listener,
               enableDLNA: _enableDLNA,
+              enablePip: _enablePip,
             ),
           );
         }));
@@ -1016,6 +1024,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   }
 
   void _lifecycleEventHandler(AppLifecycleState state) {
+    if (!_enablePip) {
+      return;
+    }
     print("========$state=======");
 
     if (state == AppLifecycleState.inactive) {
@@ -1045,7 +1056,8 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                   isFullScreenMode: true,
                   thumbnail: _thumbnail,
                   listener: _listener,
-                  enableDLNA: _enableDLNA,
+                  enableDLNA: false,
+                  enablePip: false,
               ),
             );
           }));

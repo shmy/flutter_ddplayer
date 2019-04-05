@@ -4,7 +4,9 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="" />
+    <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/lib/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/player.dart" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -29,13 +31,13 @@
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.3" value="5" />
           <entry key="project.open.time.6" value="2" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="33" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.opened" value="34" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="4097" />
+          <entry key="dart" value="4176" />
           <entry key="gitignore" value="8" />
           <entry key="gradle" value="1" />
           <entry key="java" value="247" />
@@ -46,7 +48,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="4097" />
+          <entry key="Dart" value="4176" />
           <entry key="Groovy" value="1" />
           <entry key="JAVA" value="247" />
           <entry key="PLAIN_TEXT" value="77" />
@@ -86,8 +88,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/player.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="1045" column="21" selection-start-line="1045" selection-start-column="21" selection-end-line="1045" selection-end-column="21" />
+            <state relative-caret-position="500">
+              <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -108,7 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>_PopupType</find>
       <find>buildd</find>
       <find>top</find>
       <find>stop</find>
@@ -117,7 +118,6 @@
       <find>initState</find>
       <find>lif</find>
       <find>inits</find>
-      <find>_widgetsBindingObserver</find>
       <find>4 / 3</find>
       <find>build(</find>
       <find>/ 3</find>
@@ -138,6 +138,8 @@
       <find>_a</find>
       <find>videoplayer(</find>
       <find>enterpip</find>
+      <find>_enableDLNA</find>
+      <find>_widgetsBindingObserver</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -176,7 +178,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -227,6 +228,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -645,8 +647,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/player.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="1045" column="21" selection-start-line="1045" selection-start-column="21" selection-end-line="1045" selection-end-column="21" />
+        <state relative-caret-position="500">
+          <caret line="42" column="33" selection-start-line="42" selection-start-column="33" selection-end-line="42" selection-end-column="33" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>

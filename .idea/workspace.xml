@@ -4,10 +4,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/BrowseRegistryListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/BrowseRegistryListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/player.dart" afterDir="false" />
-    </list>
+    <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -24,7 +21,7 @@
     <session id="-1997377800">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="34" />
+          <entry key="project.closed" value="35" />
           <entry key="project.open.time.1" value="9" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.2" value="12" />
@@ -42,7 +39,7 @@
           <entry key="gitignore" value="8" />
           <entry key="gradle" value="1" />
           <entry key="java" value="303" />
-          <entry key="txt" value="69" />
+          <entry key="txt" value="89" />
           <entry key="xml" value="5" />
           <entry key="yaml" value="48" />
         </counts>
@@ -52,7 +49,7 @@
           <entry key="Dart" value="4182" />
           <entry key="Groovy" value="1" />
           <entry key="JAVA" value="303" />
-          <entry key="PLAIN_TEXT" value="77" />
+          <entry key="PLAIN_TEXT" value="97" />
           <entry key="XML" value="5" />
           <entry key="YAML" value="48" />
         </counts>
@@ -89,8 +86,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/BrowseRegistryListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="50" column="42" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
+            <state relative-caret-position="318">
+              <caret line="50" column="61" lean-forward="true" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -460,7 +457,21 @@
       <option name="project" value="LOCAL" />
       <updated>1554437832496</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="修复部分dlna设备无法扫描">
+      <created>1554545540945</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1554545540945</updated>
+    </task>
+    <task id="LOCAL-00016" summary="修复部分dlna设备无法扫描">
+      <created>1554545725880</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1554545725880</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -476,7 +487,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.376556" />
-      <window_info active="true" anchor="bottom" id="Run" order="1" visible="true" weight="0.35684648" />
+      <window_info anchor="bottom" id="Run" order="1" weight="0.35684648" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="4" weight="0.32987553" />
@@ -506,7 +517,8 @@
     <MESSAGE value="修改官方核心代码" />
     <MESSAGE value="避免部分机型闪退" />
     <MESSAGE value="add pip" />
-    <option name="LAST_COMMIT_MESSAGE" value="add pip" />
+    <MESSAGE value="修复部分dlna设备无法扫描" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复部分dlna设备无法扫描" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/example/android/app/build.gradle">
@@ -744,8 +756,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/android/src/main/java/tech/shmy/plugins/dd_player/dd_player/BrowseRegistryListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="50" column="42" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
+        <state relative-caret-position="318">
+          <caret line="50" column="61" lean-forward="true" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

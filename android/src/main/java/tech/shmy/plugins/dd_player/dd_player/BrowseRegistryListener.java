@@ -39,14 +39,16 @@ public class BrowseRegistryListener extends DefaultRegistryListener {
     @Override
     public void deviceAdded(Registry registry, Device device) {
         URL ip = device.getDetails().getBaseURL();
-        if (ip == null) {
-            return;
-        }
+//        if (ip == null) {
+//            System.out.println("---------获得没有ip的设备---------");
+//            System.out.println(device.getDetails().getFriendlyName());
+//            return;
+//        }
         HashMap fd = new HashMap();
         fd.put("name", device.getDetails().getFriendlyName());
 //        fd.put("display", device.getDisplayString());
         fd.put("uuid", device.getIdentity().getUdn().getIdentifierString());
-        fd.put("ip", ip.toString());
+        fd.put("ip", ip == null ? "Unknown" : ip.toString());
         if (flutterDeviceList.indexOf(fd) != -1) {
             return;
         }

@@ -78,15 +78,17 @@ class _DdPlayer extends State<DdPlayer> {
     if (_videoPlayerController != null) {
       _videoPlayerController.dispose();
       _videoPlayerController = null;
+      unSetNormallyOn();
     }
-    unSetNormallyOn();
   }
 
   void setNormallyOn() async {
+    print("==========setNormallyOn===========");
     await DdPlayerScreen.setNormallyOn();
   }
 
   void unSetNormallyOn() async {
+    print("==========unSetNormallyOn===========");
     await DdPlayerScreen.unSetNormallyOn();
   }
 }

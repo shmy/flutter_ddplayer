@@ -59,9 +59,9 @@ class _DdPlayer extends State<DdPlayer> {
   }
 
   void initState() {
-    super.initState();
     setNormallyOn();
     _buildPlayer();
+    super.initState();
   }
 
   @override
@@ -74,12 +74,12 @@ class _DdPlayer extends State<DdPlayer> {
 
   @override
   void dispose() {
-    super.dispose();
     if (_videoPlayerController != null) {
       _videoPlayerController.dispose();
       _videoPlayerController = null;
-      unSetNormallyOn();
     }
+      unSetNormallyOn();
+    super.dispose();
   }
 
   void setNormallyOn() async {

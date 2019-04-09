@@ -10,17 +10,24 @@ import './dlna.dart';
 import 'package:video_player/video_player.dart';
 
 enum _PopupType { none, dlna, other }
-void setNormallyOn() async {
 
+void setNormallyOn() async {
   print("==========setNormallyOn===========");
   await DdPlayerScreen.setNormallyOn();
 }
 
 void unSetNormallyOn() async {
-
   print("==========unSetNormallyOn===========");
   await DdPlayerScreen.unSetNormallyOn();
 }
+
+var cpi = CircularProgressIndicator(
+  strokeWidth: 2.0,
+  valueColor: AlwaysStoppedAnimation<Color>(
+    Colors.white70,
+  ),
+);
+
 class DdPlayer extends StatefulWidget {
   String url;
   Widget thumbnail;
@@ -28,14 +35,14 @@ class DdPlayer extends StatefulWidget {
   bool enableDLNA;
   bool enablePip;
 
-  DdPlayer(
-      {Key key,
-      @required this.url,
-      this.thumbnail,
-      this.listener,
-      this.enableDLNA = false,
-      this.enablePip = false,
-      });
+  DdPlayer({
+    Key key,
+    @required this.url,
+    this.thumbnail,
+    this.listener,
+    this.enableDLNA = false,
+    this.enablePip = false,
+  });
 
   @override
   _DdPlayer createState() => _DdPlayer();
@@ -91,8 +98,6 @@ class _DdPlayer extends State<DdPlayer> {
     }
     super.dispose();
   }
-
-
 }
 
 class VideoView extends StatefulWidget {
@@ -127,6 +132,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   Function get _listener => widget.listener;
 
   bool get _enableDLNA => widget.enableDLNA;
+
   bool get _enablePip => widget.enablePip;
   bool _isHiddenControls = true;
   bool _isLocked = false;
@@ -315,7 +321,6 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     if (_videoPlayerController != null) {
       _videoPlayerController.removeListener(listener);
     }
-//    DdPlayerDlna.stop();
   }
 
   void _initPlatCode() {
@@ -432,7 +437,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     }
     Widget child = _emptyWidget();
     if (isLoading) {
-      child = CircularProgressIndicator();
+      child = cpi;
     } else if (errMsg != "") {
       child = Text(
         errMsg,
@@ -528,7 +533,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                                 ? 1.0
                                 : 0.0,
                             child: Center(
-                              child: CircularProgressIndicator(),
+                              child: cpi,
                             ),
                           )
                         : _emptyWidget(),
@@ -1056,12 +1061,12 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
             return Scaffold(
               backgroundColor: Theme.of(context).primaryColor,
               body: VideoView(
-                  controller: _videoPlayerController,
-                  isFullScreenMode: true,
-                  thumbnail: _thumbnail,
-                  listener: _listener,
-                  enableDLNA: false,
-                  enablePip: false,
+                controller: _videoPlayerController,
+                isFullScreenMode: true,
+                thumbnail: _thumbnail,
+                listener: _listener,
+                enableDLNA: false,
+                enablePip: false,
               ),
             );
           }));

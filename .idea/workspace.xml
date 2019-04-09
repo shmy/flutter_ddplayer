@@ -4,10 +4,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/player.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/player.dart" afterDir="false" />
-    </list>
+    <list default="true" id="0040ab69-14d7-4d1b-b5f9-0276de5f01a4" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -24,7 +21,7 @@
     <session id="-1997377800">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="35" />
+          <entry key="project.closed" value="36" />
           <entry key="project.open.time.1" value="9" />
           <entry key="project.open.time.16" value="2" />
           <entry key="project.open.time.2" value="12" />
@@ -42,7 +39,7 @@
           <entry key="gitignore" value="8" />
           <entry key="gradle" value="1" />
           <entry key="java" value="303" />
-          <entry key="txt" value="89" />
+          <entry key="txt" value="100" />
           <entry key="xml" value="5" />
           <entry key="yaml" value="48" />
         </counts>
@@ -52,7 +49,7 @@
           <entry key="Dart" value="4236" />
           <entry key="Groovy" value="1" />
           <entry key="JAVA" value="303" />
-          <entry key="PLAIN_TEXT" value="97" />
+          <entry key="PLAIN_TEXT" value="108" />
           <entry key="XML" value="5" />
           <entry key="YAML" value="48" />
         </counts>
@@ -384,7 +381,14 @@
       <option name="project" value="LOCAL" />
       <updated>1554545725880</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="修复常亮不生效的问题">
+      <created>1554612210746</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1554612210746</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -400,7 +404,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.376556" />
-      <window_info active="true" anchor="bottom" id="Run" order="1" visible="true" weight="0.35684648" />
+      <window_info anchor="bottom" id="Run" order="1" weight="0.35684648" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="4" weight="0.32987553" />
@@ -431,7 +435,8 @@
     <MESSAGE value="避免部分机型闪退" />
     <MESSAGE value="add pip" />
     <MESSAGE value="修复部分dlna设备无法扫描" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复部分dlna设备无法扫描" />
+    <MESSAGE value="修复常亮不生效的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复常亮不生效的问题" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/example/android/app/build.gradle">

@@ -10,7 +10,17 @@ import './dlna.dart';
 import 'package:video_player/video_player.dart';
 
 enum _PopupType { none, dlna, other }
+void setNormallyOn() async {
 
+  print("==========setNormallyOn===========");
+  await DdPlayerScreen.setNormallyOn();
+}
+
+void unSetNormallyOn() async {
+
+  print("==========unSetNormallyOn===========");
+  await DdPlayerScreen.unSetNormallyOn();
+}
 class DdPlayer extends StatefulWidget {
   String url;
   Widget thumbnail;
@@ -45,6 +55,7 @@ class _DdPlayer extends State<DdPlayer> {
   }
 
   void _buildPlayer() {
+//    setNormallyOn();
     if (widget.url == "") {
       return;
     }
@@ -59,7 +70,7 @@ class _DdPlayer extends State<DdPlayer> {
   }
 
   void initState() {
-    setNormallyOn();
+//    setNormallyOn();
     _buildPlayer();
     super.initState();
   }
@@ -78,19 +89,10 @@ class _DdPlayer extends State<DdPlayer> {
       _videoPlayerController.dispose();
       _videoPlayerController = null;
     }
-      unSetNormallyOn();
     super.dispose();
   }
 
-  void setNormallyOn() async {
-    print("==========setNormallyOn===========");
-    await DdPlayerScreen.setNormallyOn();
-  }
 
-  void unSetNormallyOn() async {
-    print("==========unSetNormallyOn===========");
-    await DdPlayerScreen.unSetNormallyOn();
-  }
 }
 
 class VideoView extends StatefulWidget {

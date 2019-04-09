@@ -62,7 +62,6 @@ class _DdPlayer extends State<DdPlayer> {
   }
 
   void _buildPlayer() {
-//    setNormallyOn();
     if (widget.url == "") {
       return;
     }
@@ -72,12 +71,12 @@ class _DdPlayer extends State<DdPlayer> {
     }
     _videoPlayerController = VideoPlayerController.network(widget.url)
       ..initialize().then((_) {
+        setNormallyOn();
         _videoPlayerController.play();
       });
   }
 
   void initState() {
-//    setNormallyOn();
     _buildPlayer();
     super.initState();
   }
@@ -93,6 +92,7 @@ class _DdPlayer extends State<DdPlayer> {
   @override
   void dispose() {
     if (_videoPlayerController != null) {
+      unSetNormallyOn();
       _videoPlayerController.dispose();
       _videoPlayerController = null;
     }

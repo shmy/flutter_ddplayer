@@ -19,14 +19,14 @@ class PlayerState extends State<Player> {
   @override
   void initState() {
     // TODO: implement initState
-    setNormallyOn();
+//    setNormallyOn();
     super.initState();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    unSetNormallyOn();
+//    unSetNormallyOn();
     super.dispose();
   }
 

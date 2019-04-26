@@ -1,4 +1,4 @@
-import './defs.dart';
+import 'package:dd_player/defs.dart';
 
 class DdPlayerVolume {
   static Future<int> get currentVolume async {

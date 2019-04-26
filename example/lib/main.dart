@@ -1,4 +1,3 @@
-import 'package:dd_player/screen.dart';
 import 'package:dd_player_example/player.dart';
 import 'package:flutter/material.dart';
 

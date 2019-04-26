@@ -1,5 +1,5 @@
 import 'dart:async';
-import './defs.dart';
+import 'package:dd_player/defs.dart';
 
 class DdPlayerDlna {
   static StreamSubscription eventSubscription;

@@ -11,7 +11,7 @@ class SlideTransitionBar extends StatelessWidget {
       {Key key,
         @required this.child,
         @required this.animation,
-        this.isBottom = false});
+        this.isBottom = false}) : super(key: key);
 
   Widget build(BuildContext context) {
     return AnimatedBuilder(

@@ -44,5 +44,8 @@ class DdOverlay {
   }
   static void hide() {
     _overlayEntry?.remove();
+//    _overlayState?.dispose();
+    _overlayState = null;
+    _overlayEntry = null;
   }
 }

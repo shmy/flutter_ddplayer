@@ -10,6 +10,7 @@ class DdPlayer extends StatefulWidget {
   String url;
   Widget thumbnail;
   Function listener;
+  VideoPlayerController videoPlayerController;
   bool enableDLNA;
   bool enablePip;
   bool enableFixed;
@@ -21,8 +22,9 @@ class DdPlayer extends StatefulWidget {
     this.listener,
     this.enableDLNA = false,
     this.enablePip = false,
+    this.videoPlayerController,
     this.enableFixed = false,
-  });
+  }) : super(key: key);
 
   @override
   _DdPlayer createState() => _DdPlayer();
@@ -30,10 +32,11 @@ class DdPlayer extends StatefulWidget {
 
 class _DdPlayer extends State<DdPlayer> {
   VideoPlayerController _videoPlayerController;
+  VideoPlayerController get videoPlayerController => widget.videoPlayerController;
 
   Widget build(BuildContext context) {
     return VideoView(
-      controller: _videoPlayerController,
+      controller: videoPlayerController != null ? videoPlayerController : _videoPlayerController,
       thumbnail: widget.thumbnail,
       listener: widget.listener,
       enableDLNA: widget.enableDLNA,
@@ -43,9 +46,14 @@ class _DdPlayer extends State<DdPlayer> {
   }
 
   void _buildPlayer() {
+    if (videoPlayerController != null) {
+      videoPlayerController..play();
+      return;
+    }
     if (widget.url == "") {
       return;
     }
+
     if (_videoPlayerController != null) {
       _videoPlayerController.pause();
       _videoPlayerController.dispose();

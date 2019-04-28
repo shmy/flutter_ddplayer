@@ -31,7 +31,7 @@ class VideoView extends StatefulWidget {
     this.enableDLNA = false,
     this.enablePip = false,
     this.enableFixed = false,
-  });
+  }) : super(key: key);
 
   @override
   _VideoView createState() => _VideoView();
@@ -279,11 +279,15 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   Widget _buildFixedVideoView() {
     return FixedVideo(
       videoPlayerController: _videoPlayerController,
-      fixedVideoCloseTaped: () {
+      videoTitle: "",
+        listener: _listener,
+      fixedVideoCloseTaped: (state) {
         DdOverlay.hide();
         _didDispose();
       },
-      fixedVideoPlayerTaped: () {},
+      fixedVideoPlayerTaped: (state) {
+        print("暂未实现");
+      }, pageState: null,
     );
   }
 

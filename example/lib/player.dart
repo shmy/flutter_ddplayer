@@ -20,7 +20,7 @@ class PlayerState extends State<Player> {
             url: "https://hair.jingpin88.com/20171029/Fillu3JT/index.m3u8",
             enableDLNA: true,
             enablePip: true,
-            enableFixed: true,
+            // enableFixed: true,
           ),
         ),
       ),

@@ -270,9 +270,9 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
       isFullScreenMode: true,
       thumbnail: _thumbnail,
       listener: _listener,
-      enableDLNA: _enablePip,
+      enableDLNA: _enableDLNA,
       enablePip: _enablePip,
-      enableFixed: false,
+      enableFixed: _enableFixed,
     );
   }
 
@@ -714,6 +714,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
           _buildControlIconButton(Icons.arrow_back, _backTouched),
           Row(
             children: <Widget>[
+              // Text(_enableDLNA.toString(), style: TextStyle(color: Colors.white),),
 //              _isFullScreenMode
 //                  ? _buildControlIconButton(Icons.speaker_notes, _switchPopup)
 //                  : _emptyWidget(),

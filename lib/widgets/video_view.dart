@@ -272,7 +272,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
       listener: _listener,
       enableDLNA: _enableDLNA,
       enablePip: _enablePip,
-      enableFixed: _enableFixed,
+      enableFixed: false,
     );
   }
 

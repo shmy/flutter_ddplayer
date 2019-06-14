@@ -100,15 +100,18 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
   }
 
   Widget _buildWrapPop(Widget child) {
+    if (!_isFullScreenMode && !_enableFixed) {
+      return child;
+    }
     return WillPopScope(
       child: child,
       onWillPop: () async {
-        if (!_isFullScreenMode) {
+        // if (!_isFullScreenMode) {
           if (_enableFixed) {
             _showOverlay();
           }
-          return true;
-        }
+        //   return true;
+        // }
         if (!_isLocked) {
           _exitFullScreen();
           return false;

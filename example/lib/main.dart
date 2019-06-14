@@ -1,5 +1,6 @@
 import 'package:dd_player_example/player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,7 +35,7 @@ class IndexPage extends StatelessWidget {
         MaterialButton(
             child: Text("press me"),
             onPressed: () {
-              Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
+              Navigator.of(context).push(new CupertinoPageRoute(builder: (context) {
                 return new Player();
               }));
             }),

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dd_player/defs.dart';
-import 'package:dd_player/channel/dlna.dart';
 import 'package:dd_player/utils/overlay.dart';
 import 'package:dd_player/channel/screen.dart';
 import 'package:dd_player/utils/lifecycle_event_handler.dart';
@@ -12,6 +11,7 @@ import 'package:dd_player/widgets/slide_transition_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_dlna/flutter_dlna.dart';
 
 class VideoView extends StatefulWidget {
   VideoPlayerController controller;
@@ -381,7 +381,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
                 onTap: () async {
 //                Toasty.success("已发送到投屏设备");
                   _hidePopup();
-                  await DdPlayerDlna.playUrl(
+                  FlutterDlna.play(
                       item["uuid"], _videoPlayerController.dataSource);
                 },
               );
@@ -393,7 +393,7 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
     if (!_enableDLNA) {
       return;
     }
-    DdPlayerDlna.init((List<dynamic> data) {
+    FlutterDlna.subscribe((List<dynamic> data) {
       if (!mounted) {
         return;
       }
@@ -401,8 +401,8 @@ class _VideoView extends State<VideoView> with TickerProviderStateMixin {
         _devices = data;
       });
     });
-    DdPlayerDlna.search();
-    List<dynamic> data = await DdPlayerDlna.devices;
+    FlutterDlna.search();
+    List<dynamic> data = await FlutterDlna.devices;
     if (!mounted) {
       return;
     }

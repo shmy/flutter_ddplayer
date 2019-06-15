@@ -13,6 +13,9 @@ dependencies:
   video_player:
     git:
       url: git://github.com/shmy/video_player_flutter.git
+  flutter_dlna:
+    git:
+      url: git://github.com/shmy/flutter_dlna.git
 dev_dependencies:
   flutter_test:
     sdk: flutter

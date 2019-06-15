@@ -48,6 +48,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_dlna:
+    dependency: transitive
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "24f4717131efb7112d4b753903cade5f859c1d3f"
+      url: "git://github.com/shmy/flutter_dlna.git"
+    source: git
+    version: "0.0.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -154,7 +163,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: bf6c7ba4d81b5094965df6276e42ef2867bc3445
+      resolved-ref: a73f3511f6ccbc8f285986bc62f618b96ec17b69
       url: "git://github.com/shmy/video_player_flutter.git"
     source: git
     version: "0.10.0+4"

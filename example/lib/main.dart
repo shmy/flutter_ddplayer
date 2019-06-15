@@ -1,8 +1,13 @@
 import 'package:dd_player_example/player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dlna/flutter_dlna.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+//  await DdPlayerDlna.stop();
+   FlutterDlna.search();
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override

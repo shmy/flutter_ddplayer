@@ -2,7 +2,8 @@
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
     <CLASSES>
       <root url="file://$PROJECT_DIR$" />
-      <root url="file://$USER_HOME$/flutter/.pub-cache/git/video_player_flutter-bf6c7ba4d81b5094965df6276e42ef2867bc3445" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/git/video_player_flutter-a73f3511f6ccbc8f285986bc62f618b96ec17b69" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/git/flutter_dlna-24f4717131efb7112d4b753903cade5f859c1d3f" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
